@@ -1,0 +1,5 @@
+allowBuilds:
+  "@parcel/watcher": true
+  esbuild: true
+minimumReleaseAgeExclude:
+  - "@1ry/short-id@0.1.0"

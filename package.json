@@ -2,21 +2,14 @@
   "name": "@1ry/basic-react-primitive-components",
   "version": "0.1.0",
   "description": "some basic react primitive components",
-  "main": "./lib/index.js",
-  "files": [
-    "lib/**/*"
+  "keywords": [
+    "serializable",
+    "typescript",
+    "typescript-library"
   ],
-  "scripts": {
-    "build": "tsc --project tsconfig.build.json",
-    "clean": "rm -rf ./lib/",
-    "cm": "cz",
-    "lint": "eslint ./src/ --fix",
-    "semantic-release": "semantic-release",
-    "typecheck": "tsc --noEmit"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dozro/basic-react-primitive-components.git"
+  "homepage": "https://github.com/dozro/basic-react-primitive-components#readme",
+  "bugs": {
+    "url": "https://github.com/dozro/basic-react-primitive-components/issues"
   },
   "license": "MPL-2.0",
   "author": {
@@ -31,21 +24,44 @@
       "url": "https://itsrye.dev"
     }
   ],
-  "engines": {
-    "node": ">=12.0"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dozro/basic-react-primitive-components.git"
   },
-  "keywords": [
-    "serializable",
-    "typescript",
-    "typescript-library"
+  "files": [
+    "lib/**/*"
   ],
-  "bugs": {
-    "url": "https://github.com/dozro/basic-react-primitive-components/issues"
+  "main": "./lib/index.js",
+  "module": "./lib/index.mjs",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.mjs",
+      "require": "./lib/index.js"
+    },
+    "./lib/index.css": "./lib/index.css"
   },
-  "homepage": "https://github.com/dozro/basic-react-primitive-components#readme",
+  "scripts": {
+    "build": "rollup -c",
+    "clean": "rm -rf ./lib/",
+    "cm": "cz",
+    "lint": "eslint ./src/ --fix",
+    "semantic-release": "semantic-release",
+    "fmt": "oxfmt",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@1ry/short-id": "^0.1.0",
+    "clsx": "^2.1.1"
+  },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^29.0.3",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-typescript": "^12.3.0",
     "@ryansonshine/commitizen": "^4.2.8",
     "@ryansonshine/cz-conventional-changelog": "^3.3.4",
+    "@types/react": "^19.2.17",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "conventional-changelog-conventionalcommits": "^5.0.0",
@@ -54,20 +70,28 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.4.1",
     "lint-staged": "^13.3.0",
+    "oxfmt": "^0.56.0",
+    "postcss": "^8.5.15",
     "prettier": "^2.8.8",
-    "semantic-release": "^21.1.2"
+    "rollup": "^4.62.2",
+    "rollup-plugin-postcss": "^4.0.2",
+    "sass": "^1.101.0",
+    "semantic-release": "^21.1.2",
+    "typed-scss-modules": "^8.1.1"
   },
   "peerDependencies": {
-    "typescript": "^4.9.5",
-    "react": "^19.0.0"
+    "react": "^19.0.0",
+    "tailwind-merge": "^3.6.0",
+    "tailwindcss": "^4.3.1",
+    "typescript": "^4.9.5"
+  },
+  "lint-staged": {
+    "*.ts": "eslint --cache --cache-location .eslintcache --fix"
   },
   "config": {
     "commitizen": {
       "path": "./node_modules/@ryansonshine/cz-conventional-changelog"
     }
-  },
-  "lint-staged": {
-    "*.ts": "eslint --cache --cache-location .eslintcache --fix"
   },
   "release": {
     "branches": [
@@ -113,5 +137,8 @@
       "@semantic-release/npm",
       "@semantic-release/github"
     ]
+  },
+  "engines": {
+    "node": ">=12.0"
   }
 }
