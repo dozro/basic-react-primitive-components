@@ -4,6 +4,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import postcss from 'rollup-plugin-postcss';
+import renameNodeModules from 'rollup-plugin-rename-node-modules';
 import { readFileSync } from 'node:fs';
 
 const pkg = JSON.parse(readFileSync(new URL('./package.json', import.meta.url)));
@@ -20,6 +21,7 @@ const sharedPlugins = [
             }]
         ]
     }),
+    renameNodeModules('external'),
 ];
 
 const external = [
@@ -31,10 +33,10 @@ export default defineConfig([
     {
         input: 'src/index.ts',
         output: {
-            dir: 'lib',               // Switch from 'file' to 'dir'
+            dir: 'lib',
             format: 'cjs',
             entryFileNames: '[name].js',
-            preserveModules: true,    // Restores Box.js, Button.js, etc.
+            preserveModules: true, 
             preserveModulesRoot: 'src',
             sourcemap: true,
         },
@@ -49,17 +51,17 @@ export default defineConfig([
                     declarationDir: './lib',
                     outDir: './lib'
                 },
-                exclude: ['**/*.test.tsx', '**/*.stories.tsx'],
+                exclude: ['**/*.test.tsx', '**/*.stories.tsx', './node_modules/**', './lib/**', './dist/**'],
             }),
         ],
     },
     {
         input: 'src/index.ts',
         output: {
-            dir: 'lib',               // Switch from 'file' to 'dir'
+            dir: 'lib',   
             format: 'esm',
             entryFileNames: '[name].mjs',
-            preserveModules: true,    // Restores Box.mjs, Button.mjs, etc.
+            preserveModules: true,  
             preserveModulesRoot: 'src',
             sourcemap: true,
         },
@@ -73,7 +75,7 @@ export default defineConfig([
                     declarationMap: false,
                     outDir: './lib'
                 },
-                exclude: ['**/*.test.tsx', '**/*.stories.tsx'],
+                exclude: ['**/*.test.tsx', '**/*.stories.tsx', './node_modules/**', './lib/**', './dist/**'],
             }),
         ],
     }
