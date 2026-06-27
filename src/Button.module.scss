@@ -1,0 +1,51 @@
+.RyButton {
+  color: black;
+  cursor: pointer;
+  border-style: groove;
+  border-color: black;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
+
+  @media (prefers-color-scheme: dark) {
+    color: white;
+    border-color: white;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+
+    @media (prefers-color-scheme: dark) {
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+  }
+  &.glow {
+    &:hover {
+      background: linear-gradient(135deg, #ff8c00, #ff3c00);
+      box-shadow: 0 0 20px rgba(255, 140, 0, 0.8);
+    }
+  }
+  &.no-border {
+    border: none;
+    border-style: none;
+  }
+  &.transparent {
+    background: transparent;
+  }
+}
