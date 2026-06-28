@@ -17,3 +17,10 @@ export { ModalProps } from '$components/Modal'
 export { CardProps } from '$components/Card'
 export { IconButtonProps } from '$components/IconButton'
 export { ErrorMessageProps } from '$components/ErrorMessage'
+
+// other types
+export { VariantProps } from '$utils/tv'
+export { PaddingSize, PADDING_MAP } from '$types/Padding'
+export { TextFontWeight, FONT_MAP } from '$types/TextFont'
+export { TextVariant, VARIANT_MAP } from '$types/TextVariant'
+export { TextSize, SIZE_MAP } from '$types/TextSizing'
