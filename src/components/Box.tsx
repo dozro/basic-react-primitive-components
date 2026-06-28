@@ -2,6 +2,7 @@ import { generateShortId } from '@1ry/short-id'
 import { tv } from 'tailwind-variants'
 import { VariantProps } from '$utils/tv'
 import React, { Children, HTMLAttributes, ReactNode, useMemo } from 'react'
+import backgroundStyles from '$styles/Backgrounds.module.scss'
 
 const boxStyles = tv({
 	base: 'transition-all duration-200',
@@ -16,6 +17,21 @@ const boxStyles = tv({
 			horizontal: 'flex flex-row',
 			vertical: 'flex flex-col',
 		},
+    background: {
+            teal: backgroundStyles.bgTeal,
+            yellow: backgroundStyles.bgYellow,
+            gray: backgroundStyles.bgGray,
+            transparent: 'bg-transparent',
+            magenta: backgroundStyles.bgMagenta,
+            cyan: backgroundStyles.bgCyan,
+            amber: backgroundStyles.bgAmber,
+            lime: backgroundStyles.bgLime,
+            indigo: backgroundStyles.bgIndigo,
+            rose: backgroundStyles.bgRose,
+            slate: backgroundStyles.bgSlate,
+            violet: backgroundStyles.bgViolet,
+            orange: backgroundStyles.bgOrange,
+    },
 		align: {
 			none: '',
 			left: 'items-start text-left',
@@ -57,6 +73,7 @@ export function Box({
 	orientation = 'none',
 	align = 'none',
 	justify = 'none',
+  background = 'transparent',
 	children,
 	isolate = false,
 	id: customId,
@@ -79,6 +96,7 @@ export function Box({
 				justify,
 				isolate,
 				className,
+        background,
 			})}
 			{...props}
 		>

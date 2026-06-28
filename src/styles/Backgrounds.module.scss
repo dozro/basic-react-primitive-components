@@ -1,0 +1,72 @@
+.bgTeal{
+    background-color: teal;
+}
+.bgYellow{
+    background-color: yellow;
+}
+.bgGray{
+    background-color: gray;
+}
+.bgWhite{
+    background-color: white;
+}
+.bgMagenta{
+    background-color: magenta;
+}
+.bgCyan{
+    background-color: cyan;
+    @media (prefers-color-scheme: dark) {
+        background-color: #00ffff;
+    }
+}
+.bgAmber{
+    background-color: #ffbf00;
+    @media (prefers-color-scheme: dark) {
+        background-color: #ffbf00;
+    }
+}
+.bgLime {
+    background-color: lime;
+    @media (prefers-color-scheme: dark) {
+        background-color: #32cd32;
+    }
+}
+.bgOrange {
+    background-color: orange;
+    @media (prefers-color-scheme: dark) {
+        background-color: #ff8c00;
+    }
+}
+.bgIndigo {
+    background-color: indigo;
+    @media (prefers-color-scheme: dark) {
+        background-color: #4b0082;
+    }
+}
+.bgRose {
+    background-color: #ff007f;
+    @media (prefers-color-scheme: dark) {
+        background-color: #ff1493;
+    }
+}
+.bgSlate {
+    background-color: #708090;
+    @media (prefers-color-scheme: dark) {
+        background-color: #2f4f4f;
+    }
+}
+.bgViolet {
+    background-color: #800080;
+    @media (prefers-color-scheme: dark) {
+        background-color: #4b0082;
+    }
+}
+.bgTransparent{
+    background-color: transparent;
+}
+.bgRed{
+    background-color: red;
+    @media (prefers-color-scheme: dark) {
+        background-color: #8B0000;
+    }
+}
