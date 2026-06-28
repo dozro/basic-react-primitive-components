@@ -31,7 +31,7 @@ export function IconButton({
 	label,
 	id: customId,
 	...props
-}: Readonly<IconButtonProps>) {
+}: IconButtonProps) {
 	const id = useMemo(() => customId ?? generateShortId(7), [customId])
 	return (
 		<Button name={id} className={inputButtonStyles({ variant: 'default' })} {...props}>

@@ -28,7 +28,7 @@ export function Input({
 	type,
 	id: customId,
 	...props
-}: Readonly<InputProps>) {
+}: InputProps) {
 	const id = useMemo(() => customId ?? generateShortId(7), [customId])
 	const name = useMemo(() => customName ?? id, [customName, id])
 	const cname = 'w-full bg-transparent outline-none text-sm text-zinc-900 placeholder:text-zinc-400'

@@ -62,7 +62,7 @@ export function Box({
 	id: customId,
 	gap = 0,
 	...props
-}: Readonly<BoxProps>) {
+}: BoxProps) {
 	const id = useMemo(() => customId ?? generateShortId(7), [customId])
 	const Component = variant === 'navbar' && !as ? 'nav' : as || 'div'
 	const childrenCount = useMemo(() => Children.count(children) ?? [], [children])

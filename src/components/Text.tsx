@@ -32,14 +32,14 @@ export type TextProps<T extends AllowedElements> = VariantProps<typeof textStyle
 
 export function Text<T extends AllowedElements = 'span'>({
 	variant = 'default',
-	as = 'span',
+	as,
 	className,
 	children,
 	paddingBefore = 'none',
 	font = 'medium',
 	size,
 	...props
-}: Readonly<TextProps<T>>) {
+}: TextProps<T>) {
 	const Component = (as || 'span') as ElementType
 
 	return (

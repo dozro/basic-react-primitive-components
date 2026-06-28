@@ -35,7 +35,7 @@ export function Button({
 	title,
 	id: customId,
 	...props
-}: Readonly<ButtonProps>) {
+}: ButtonProps) {
 	const id = useMemo(() => customId ?? generateShortId(7), [customId])
 	if (!title) {
 		console.warn('button title is missing')
