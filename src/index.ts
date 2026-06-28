@@ -1,3 +1,8 @@
-export { Box } from "./Box";
-export { Button } from "./Button";
-export { Card } from "./Card";
+export { Box } from '$components/Box'
+export { Button } from '$components/Button'
+export { Card } from '$components/Card'
+export { ErrorMessage } from '$components/ErrorMessage'
+export { IconButton } from '$components/IconButton'
+export { Text } from '$components/Text'
+export { Input } from '$components/Input'
+export { Modal } from '$components/Modal'

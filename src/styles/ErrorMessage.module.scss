@@ -1,0 +1,11 @@
+.errorMessageBase {
+ 	color: red;
+ 	font-size: 0.8rem;
+ 	margin-top: 0.25rem;
+    &.critical {
+        font-weight: bold;
+    }
+    &.warning {
+        font-style: italic;
+    }
+}

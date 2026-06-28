@@ -1,0 +1,8 @@
+.TextComponent {
+	color: black;
+	font-family: 'Roboto', sans-serif;
+
+	@media (prefers-color-scheme: dark) {
+		color: white;
+	}
+}

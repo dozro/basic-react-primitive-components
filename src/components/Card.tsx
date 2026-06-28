@@ -1,0 +1,29 @@
+import { BoxProps, Box } from '$components/Box'
+import styles from '$styles/Card.module.scss'
+import React from 'react'
+import { tv } from 'tailwind-variants'
+import { VariantProps } from '$utils/tv'
+
+const cardStyles = tv({
+	base: styles.cardBase,
+	variants: {
+		noBorder: {
+			true: styles.noBorder,
+		},
+	},
+})
+
+type CardProps = BoxProps & VariantProps<typeof cardStyles> & {
+}
+
+export const Card = ({ children, className, noBorder, ...props }: CardProps) => (
+	<Box
+		{...props}
+		className={cardStyles({
+			noBorder,
+			className,
+		})}
+	>
+		{children}
+	</Box>
+)
