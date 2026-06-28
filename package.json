@@ -1,13 +1,13 @@
 {
 	"name": "@1ry/basic-react-primitive-components",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "some basic react primitive components",
 	"keywords": [
-		"react",
-		"typescript",
-		"primitives",
 		"components",
-		"tailwindcss"
+		"primitives",
+		"react",
+		"tailwindcss",
+		"typescript"
 	],
 	"homepage": "https://github.com/dozro/basic-react-primitive-components#readme",
 	"bugs": {
@@ -77,8 +77,10 @@
 		"postcss": "^8.5.15",
 		"prettier": "^2.8.8",
 		"rollup": "^4.62.2",
+		"rollup-plugin-dts": "^6.4.1",
 		"rollup-plugin-postcss": "^4.0.2",
 		"rollup-plugin-rename-node-modules": "^1.3.1",
+		"rollup-plugin-tsconfig-paths": "^1.5.2",
 		"sass": "^1.101.0",
 		"semantic-release": "^21.1.2",
 		"typed-scss-modules": "^8.1.1"

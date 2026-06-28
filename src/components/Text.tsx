@@ -21,7 +21,7 @@ const textStyles = tv({
 	},
 })
 
-type TextProps<T extends AllowedElements> = VariantProps<typeof textStyles> & {
+export type TextProps<T extends AllowedElements> = VariantProps<typeof textStyles> & {
 	as?: T
 	paddingBefore?: PaddingSize
 	/**

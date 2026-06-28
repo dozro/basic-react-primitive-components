@@ -7,20 +7,21 @@ import { VariantProps } from '$utils/tv'
 
 const errorMessageStyles = tv({
 	base: styles.errorMessageBase,
-    variants: {
-        variant: {
-            critical: styles.critical,
-            warning: styles.warning,
-        },
-    },
-    defaultVariants: {
-        variant: 'critical',
-    },
+	variants: {
+		variant: {
+			critical: styles.critical,
+			warning: styles.warning,
+		},
+	},
+	defaultVariants: {
+		variant: 'critical',
+	},
 })
 
-export type ErrorMessageProps = BoxProps & VariantProps<typeof errorMessageStyles> & {
-	error: Error
-}
+export type ErrorMessageProps = BoxProps &
+	VariantProps<typeof errorMessageStyles> & {
+		error: Error
+	}
 
 export function ErrorMessage({ error, ...props }: ErrorMessageProps) {
 	return (

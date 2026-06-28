@@ -13,8 +13,7 @@ const cardStyles = tv({
 	},
 })
 
-type CardProps = BoxProps & VariantProps<typeof cardStyles> & {
-}
+export type CardProps = BoxProps & VariantProps<typeof cardStyles> & {}
 
 export const Card = ({ children, className, noBorder, ...props }: CardProps) => (
 	<Box
