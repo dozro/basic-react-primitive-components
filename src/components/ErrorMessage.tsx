@@ -2,7 +2,6 @@ import { Box, BoxProps } from '$components/Box'
 import { Text } from '$components/Text'
 import React from 'react'
 import styles from '$styles/ErrorMessage.module.scss'
-import backgroundStyles from '$styles/Backgrounds.module.scss'
 import { tv, type VariantProps } from 'tailwind-variants'
 
 const errorMessageStyles = tv({
@@ -11,11 +10,11 @@ const errorMessageStyles = tv({
 		variant: {
 			critical: [
                 styles.critical,
-                backgroundStyles.bgRed
+                'bg-red-500 dark:bg-red-900',
             ],
 			warning: [
                 styles.warning,
-                backgroundStyles.bgYellow
+                'bg-yellow-400 dark:bg-yellow-300'
             ],
 		},
 	},

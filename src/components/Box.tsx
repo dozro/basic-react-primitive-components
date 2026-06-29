@@ -1,7 +1,6 @@
 import { generateShortId } from '@1ry/short-id'
 import { tv, type VariantProps } from 'tailwind-variants'
 import React, { Children, HTMLAttributes, ReactNode, useMemo } from 'react'
-import backgroundStyles from '$styles/Backgrounds.module.scss'
 
 const boxStyles = tv({
 	base: 'transition-all duration-200',
@@ -16,21 +15,23 @@ const boxStyles = tv({
 			horizontal: 'flex flex-row',
 			vertical: 'flex flex-col',
 		},
-    background: {
-            teal: backgroundStyles.bgTeal,
-            yellow: backgroundStyles.bgYellow,
-            gray: backgroundStyles.bgGray,
-            transparent: 'bg-transparent',
-            magenta: backgroundStyles.bgMagenta,
-            cyan: backgroundStyles.bgCyan,
-            amber: backgroundStyles.bgAmber,
-            lime: backgroundStyles.bgLime,
-            indigo: backgroundStyles.bgIndigo,
-            rose: backgroundStyles.bgRose,
-            slate: backgroundStyles.bgSlate,
-            violet: backgroundStyles.bgViolet,
-            orange: backgroundStyles.bgOrange,
-    },
+    	background: {
+			teal: 'bg-teal-500',
+			yellow: 'bg-yellow-400',
+			gray: 'bg-gray-500',
+			white: 'bg-white',
+			transparent: 'bg-transparent',
+			magenta: 'bg-fuchsia-500',
+			cyan: 'bg-cyan-500 dark:bg-cyan-300',
+			amber: 'bg-amber-500 dark:bg-amber-400',
+			lime: 'bg-lime-500 dark:bg-lime-400',
+			orange: 'bg-orange-500 dark:bg-orange-400',
+			indigo: 'bg-indigo-500 dark:bg-indigo-400',
+			violet: 'bg-violet-500 dark:bg-violet-400',
+			rose: 'bg-rose-500 dark:bg-rose-400',
+			slate: 'bg-slate-500 dark:bg-slate-700',
+			red: 'bg-red-500 dark:bg-red-900',
+		},
 		align: {
 			none: '',
 			left: 'items-start text-left',
