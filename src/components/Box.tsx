@@ -1,6 +1,5 @@
 import { generateShortId } from '@1ry/short-id'
-import { tv } from 'tailwind-variants'
-import { VariantProps } from '$utils/tv'
+import { tv, type VariantProps } from 'tailwind-variants'
 import React, { Children, HTMLAttributes, ReactNode, useMemo } from 'react'
 import backgroundStyles from '$styles/Backgrounds.module.scss'
 

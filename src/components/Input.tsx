@@ -3,8 +3,7 @@ import { Button } from '$components/Button'
 import { Text } from '$components/Text'
 import { generateShortId } from '@1ry/short-id'
 import React, { HTMLProps, useMemo } from 'react'
-import { tv } from 'tailwind-variants'
-import { VariantProps } from '$utils/tv'
+import { tv, type VariantProps } from 'tailwind-variants'
 
 const InputStyles = tv({
 	base: 'w-full bg-transparent outline-none text-sm text-zinc-900 placeholder:text-zinc-400',

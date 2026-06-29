@@ -7,7 +7,6 @@ import alias from '@rollup/plugin-alias'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 import dts from 'rollup-plugin-dts'
-import tsconfigPaths from 'rollup-plugin-tsconfig-paths'
 import { readFileSync } from 'node:fs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -31,7 +30,7 @@ export default defineConfig([
 				dir: 'lib',
 				format: 'cjs',
 				entryFileNames: '[name].js',
-				preserveModules: true,
+				preserveModules: false,
 				preserveModulesRoot: 'src',
 				sourcemap: true,
 				exports: 'named',
@@ -55,7 +54,7 @@ export default defineConfig([
 					{ find: '$styles', replacement: path.resolve(__dirname, 'src/styles') },
 				],
 			}),
-			resolve(),
+			resolve({ extensions: ['.ts', '.tsx', '.d.ts', '.scss'] }),,
 			commonjs(),
 			postcss({
 				extract: 'index.css',
@@ -69,6 +68,8 @@ export default defineConfig([
 				outDir: './lib',
 				compilerOptions: {
 					composite: false,
+					ignoreDeprecations: "6.0",
+					rootDir: './src',
 				},
 				exclude: [
 					'**/*.test.tsx',
@@ -101,7 +102,7 @@ export default defineConfig([
 				],
 				customResolver: resolve({ extensions: ['.ts', '.tsx', '.d.ts'] }),
 			}),
-			resolve({ extensions: ['.ts', '.tsx', '.d.ts'] }),
+			resolve({ extensions: ['.ts', '.tsx', '.d.ts', '.scss'] }),
 			dts(),
 		],
 	},

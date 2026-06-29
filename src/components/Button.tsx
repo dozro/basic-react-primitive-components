@@ -2,8 +2,7 @@ import styles from '$styles/Button.module.scss'
 import { generateShortId } from '@1ry/short-id'
 import type { ButtonHTMLAttributes } from 'react'
 import React, { useMemo } from 'react'
-import { tv } from 'tailwind-variants'
-import { VariantProps } from '$utils/tv'
+import { tv, type VariantProps } from 'tailwind-variants'
 
 const buttonStyles = tv({
 	base: styles.buttonBase,

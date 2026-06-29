@@ -6,8 +6,7 @@ import { twMerge } from 'tailwind-merge'
 import { VARIANT_MAP } from '$types/TextVariant'
 import { PADDING_MAP, PaddingSize } from '$types/Padding'
 import { SIZE_MAP } from '$types/TextSizing'
-import { tv } from 'tailwind-variants'
-import { VariantProps } from '$utils/tv'
+import { tv, type VariantProps } from 'tailwind-variants'
 
 type AllowedElements = 'p' | 'span' | 'label' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 

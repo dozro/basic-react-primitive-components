@@ -2,8 +2,7 @@ import { Button, ButtonProps } from '$components/Button'
 import { Text } from '$components/Text'
 import { generateShortId } from '@1ry/short-id'
 import React, { ReactNode, useMemo } from 'react'
-import { tv } from 'tailwind-variants'
-import { VariantProps } from '$utils/tv'
+import { tv, type VariantProps } from 'tailwind-variants'
 import ibStyles from '$styles/IconButton.module.scss'
 
 const inputButtonStyles = tv({

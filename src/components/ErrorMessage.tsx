@@ -3,8 +3,7 @@ import { Text } from '$components/Text'
 import React from 'react'
 import styles from '$styles/ErrorMessage.module.scss'
 import backgroundStyles from '$styles/Backgrounds.module.scss'
-import { tv } from 'tailwind-variants'
-import { VariantProps } from '$utils/tv'
+import { tv, type VariantProps } from 'tailwind-variants'
 
 const errorMessageStyles = tv({
 	base: styles.errorMessageBase,

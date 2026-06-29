@@ -1,8 +1,7 @@
 import { BoxProps, Box } from '$components/Box'
 import styles from '$styles/Card.module.scss'
 import React from 'react'
-import { tv } from 'tailwind-variants'
-import { VariantProps } from '$utils/tv'
+import { tv, type VariantProps } from 'tailwind-variants'
 
 const cardStyles = tv({
 	base: styles.cardBase,
