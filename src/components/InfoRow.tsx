@@ -30,7 +30,14 @@ type InfoRowProps = BoxProps & {
 	children: ReactNode
 } & VariantProps<typeof infoRowStyles>
 
-export const InfoRow = ({ icon, children, size, className, border, ...props }: Readonly<InfoRowProps>) => {
+export const InfoRow = ({
+	icon,
+	children,
+	size,
+	className,
+	border,
+	...props
+}: Readonly<InfoRowProps>) => {
 	return (
 		<Box
 			className={clsx(infoRowStyles({ size, className, border }), 'isolate')}
