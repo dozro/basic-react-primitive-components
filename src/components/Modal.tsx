@@ -6,6 +6,7 @@ import React, { ReactNode, useMemo } from 'react'
 import { tv, type VariantProps } from 'tailwind-variants'
 import MODALSTYLES from '../styles/Modal.module.scss'
 import clsx from 'clsx'
+import { FloppyDiskIcon, XIcon } from '@phosphor-icons/react'
 
 const modalStyles = tv({
 	variants: {
@@ -39,14 +40,10 @@ export const Modal = ({
 	modalSubTitle = 'Press ESC key or click the button below to close',
 	children,
 	closeText = 'Close',
-	closeIcon = (
-		<Text as="span" variant="wavy">
-			✖
-		</Text>
-	),
+	closeIcon = <XIcon />,
 	showSubmitButton,
 	submitText,
-	submitIcon,
+	submitIcon = <FloppyDiskIcon />,
 	...props
 }: ModalProps) => {
 	const id = useMemo(() => customId ?? generateShortId(7), [customId])

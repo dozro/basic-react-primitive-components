@@ -47,7 +47,7 @@ export default defineConfig([
 				preserveModulesRoot: 'src',
 				sourcemap: true,
 				exports: 'named',
-				minifyInternalExports: true,
+				minifyInternalExports: false,
 				interop: 'auto',
 			},
 			{
@@ -88,11 +88,18 @@ export default defineConfig([
 				],
 			}),
 			terser({
-				compress: true,
+				compress: {
+					inline: 1,
+					unsafe_arrows: true,
+				},
 				mangle: true,
 				format: {
-					comments: false,
+					comments: 'some',
+					preamble: `/* ${pkg.name} v${pkg.version} | (c) 2024 Rye | Apache 2.0 License */`,
+					webkit: true,
 				},
+				ie8: true,
+				safari10: true,
 			}),
 			commonjs(),
 			typescript({

@@ -9,6 +9,10 @@ interface LazyProps {
 	loadingText?: string
 }
 
+/**
+ * Wraps a lazy component in Suspense with a customizable loading message.
+ * @author Rye
+ */
 export const Lazy = ({ component: Component, loadingText }: LazyProps) => {
 	const { lazyLoadingText: configLazyLoadingText } = useRyLibConfig()
 	const lazyLoadingFallbackText =
