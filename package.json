@@ -26,7 +26,6 @@
 			"url": "https://itsrye.dev"
 		}
 	],
-	"type": "module",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/dozro/basic-react-primitive-components.git"
@@ -34,6 +33,7 @@
 	"files": [
 		"lib/**/*"
 	],
+	"type": "module",
 	"main": "./lib/index.js",
 	"module": "./lib/index.mjs",
 	"types": "./lib/index.d.ts",
@@ -119,6 +119,11 @@
 			"path": "./node_modules/@ryansonshine/cz-conventional-changelog"
 		}
 	},
+	"eslintConfig": {
+		"extends": [
+			"plugin:storybook/recommended"
+		]
+	},
 	"release": {
 		"branches": [
 			"main"
@@ -166,10 +171,5 @@
 	},
 	"engines": {
 		"node": ">=12.0"
-	},
-	"eslintConfig": {
-		"extends": [
-			"plugin:storybook/recommended"
-		]
 	}
 }

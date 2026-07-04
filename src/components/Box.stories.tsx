@@ -33,10 +33,24 @@ const meta: Meta<typeof Box> = {
 		isolate: {
 			control: 'boolean',
 		},
-        background: {
-            control: 'select',
-            options: ['teal', 'yellow', 'gray', 'transparent', 'magenta', 'cyan', 'amber', 'lime', 'indigo', 'rose', 'slate', 'violet', 'orange'],
-        },
+		background: {
+			control: 'select',
+			options: [
+				'teal',
+				'yellow',
+				'gray',
+				'transparent',
+				'magenta',
+				'cyan',
+				'amber',
+				'lime',
+				'indigo',
+				'rose',
+				'slate',
+				'violet',
+				'orange',
+			],
+		},
 	},
 	args: {
 		variant: 'default',
@@ -45,11 +59,13 @@ const meta: Meta<typeof Box> = {
 		justify: 'none',
 		gap: 0,
 		isolate: false,
-        background: 'teal',
+		background: 'teal',
 		children: (
 			<>
 				<div style={{ padding: '1rem', borderRadius: '0.25rem' }}>Block 1</div>
-				<div style={{ padding: '1rem', backgroundColor: '#cbd5e1', borderRadius: '0.25rem' }}>Block 2</div>
+				<div style={{ padding: '1rem', backgroundColor: '#cbd5e1', borderRadius: '0.25rem' }}>
+					Block 2
+				</div>
 				<div style={{ padding: '1rem', borderRadius: '0.25rem' }}>Block 3</div>
 			</>
 		),

@@ -54,7 +54,8 @@ export default defineConfig([
 					{ find: '$styles', replacement: path.resolve(__dirname, 'src/styles') },
 				],
 			}),
-			resolve({ extensions: ['.ts', '.tsx', '.d.ts', '.scss'] }),,
+			resolve({ extensions: ['.ts', '.tsx', '.d.ts', '.scss'] }),
+			,
 			commonjs(),
 			postcss({
 				extract: 'index.css',
@@ -68,7 +69,7 @@ export default defineConfig([
 				outDir: './lib',
 				compilerOptions: {
 					composite: false,
-					ignoreDeprecations: "6.0",
+					ignoreDeprecations: '6.0',
 					rootDir: './src',
 				},
 				exclude: [

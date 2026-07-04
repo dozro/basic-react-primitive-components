@@ -9,26 +9,26 @@ const meta: Meta<typeof Text> = {
 		children: 'Es ist ein logischer Schluss, dass gutes Design zeitlos ist.',
 		as: 'span',
 		font: 'normal',
-        size: 'base',
-        variant: 'default',
+		size: 'base',
+		variant: 'default',
 	},
 	argTypes: {
 		as: {
 			control: 'select',
 			options: ['p', 'span', 'label', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
 		},
-        font: {
-            control: 'select',
-            options: ['semibold', 'medium', 'bold', 'normal'],
-        },
-        size: {
-            control: 'select',
-            options: ['xs', 'small', 'base', 'large', 'xl', '2xl'],
-        },
-        variant: {
-            control: 'select',
-            options: ['default', 'title', 'wavy', 'muted'],
-        }
+		font: {
+			control: 'select',
+			options: ['semibold', 'medium', 'bold', 'normal'],
+		},
+		size: {
+			control: 'select',
+			options: ['xs', 'small', 'base', 'large', 'xl', '2xl'],
+		},
+		variant: {
+			control: 'select',
+			options: ['default', 'title', 'wavy', 'muted'],
+		},
 	},
 }
 
@@ -41,8 +41,8 @@ export const Heading: Story = {
 	args: {
 		as: 'h1',
 		children: 'Hauptüberschrift',
-        variant: 'title',
-        size: '2xl',
+		variant: 'title',
+		size: '2xl',
 	},
 }
 

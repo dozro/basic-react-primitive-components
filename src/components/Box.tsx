@@ -15,7 +15,7 @@ const boxStyles = tv({
 			horizontal: 'flex flex-row',
 			vertical: 'flex flex-col',
 		},
-    	background: {
+		background: {
 			teal: 'bg-teal-500',
 			yellow: 'bg-yellow-400',
 			gray: 'bg-gray-500',
@@ -73,7 +73,7 @@ export function Box({
 	orientation = 'none',
 	align = 'none',
 	justify = 'none',
-  background = 'transparent',
+	background = 'transparent',
 	children,
 	isolate = false,
 	id: customId,
@@ -96,7 +96,7 @@ export function Box({
 				justify,
 				isolate,
 				className,
-        background,
+				background,
 			})}
 			{...props}
 		>

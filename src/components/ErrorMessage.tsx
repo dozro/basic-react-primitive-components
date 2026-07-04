@@ -8,14 +8,8 @@ const errorMessageStyles = tv({
 	base: styles.errorMessageBase,
 	variants: {
 		variant: {
-			critical: [
-                styles.critical,
-                'bg-red-500 dark:bg-red-900',
-            ],
-			warning: [
-                styles.warning,
-                'bg-yellow-400 dark:bg-yellow-300'
-            ],
+			critical: [styles.critical, 'bg-red-500 dark:bg-red-900'],
+			warning: [styles.warning, 'bg-yellow-400 dark:bg-yellow-300'],
 		},
 	},
 	defaultVariants: {

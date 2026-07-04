@@ -12,18 +12,36 @@ const meta: Meta<typeof Card> = {
 		noBorder: false,
 		children: (
 			<Box style={{ padding: '1rem' }}>
-				<Text as="h3" style={{ margin: 0, marginBottom: '0.5rem' }}>Card Titel</Text>
-				<Text as="p" style={{ margin: 0 }}>Das ist der Inhalt deiner wunderschönen Card-Komponente.</Text>
+				<Text as="h3" style={{ margin: 0, marginBottom: '0.5rem' }}>
+					Card Titel
+				</Text>
+				<Text as="p" style={{ margin: 0 }}>
+					Das ist der Inhalt deiner wunderschönen Card-Komponente.
+				</Text>
 			</Box>
 		),
-        background: 'transparent',
+		background: 'transparent',
 	},
-    argTypes: {
-        background: {
-            control: 'select',
-            options: ['teal', 'yellow', 'gray', 'transparent', 'magenta', 'cyan', 'amber', 'lime', 'indigo', 'rose', 'slate', 'violet', 'orange'],
-        },
-    },
+	argTypes: {
+		background: {
+			control: 'select',
+			options: [
+				'teal',
+				'yellow',
+				'gray',
+				'transparent',
+				'magenta',
+				'cyan',
+				'amber',
+				'lime',
+				'indigo',
+				'rose',
+				'slate',
+				'violet',
+				'orange',
+			],
+		},
+	},
 }
 
 export default meta

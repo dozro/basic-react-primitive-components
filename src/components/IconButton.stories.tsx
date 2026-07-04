@@ -10,18 +10,18 @@ const meta: Meta<typeof IconButton> = {
 		label: 'Speichern',
 		children: <span>💾</span>,
 		title: 'Icon Button',
-        glowing: false,
-        noBorder: true,
-        transparent: true,
-        asSubmit: false,
+		glowing: false,
+		noBorder: true,
+		transparent: true,
+		asSubmit: false,
 	},
-    argTypes: {
-        glowing: { control: 'boolean' },
-        noBorder: { control: 'boolean' },
-        transparent: { control: 'boolean' },
-        asSubmit: { control: 'boolean' },
-        onClick: { action: 'clicked' },
-  },
+	argTypes: {
+		glowing: { control: 'boolean' },
+		noBorder: { control: 'boolean' },
+		transparent: { control: 'boolean' },
+		asSubmit: { control: 'boolean' },
+		onClick: { action: 'clicked' },
+	},
 }
 
 export default meta

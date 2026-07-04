@@ -9,7 +9,9 @@ const meta: Meta<typeof Modal> = {
 	args: {
 		modalTitle: <h2 style={{ margin: 0 }}>Sicherheitsabfrage</h2>,
 		modalSubTitle: 'Möchtest du die Selbstzerstörung wirklich abbrechen?',
-		children: <p style={{ padding: '1rem 0' }}>Dieser Vorgang kann nicht rückgängig gemacht werden.</p>,
+		children: (
+			<p style={{ padding: '1rem 0' }}>Dieser Vorgang kann nicht rückgängig gemacht werden.</p>
+		),
 		showSubmitButton: true,
 		submitText: 'Bestätigen',
 		closeText: 'Abbrechen',
