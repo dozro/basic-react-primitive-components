@@ -1,7 +1,7 @@
 import React, { HTMLProps } from 'react'
 import { Box, type BoxProps } from '$components/Box'
 
-type ImageProps = HTMLProps<HTMLImageElement> &
+export type ImageProps = HTMLProps<HTMLImageElement> &
 	Pick<BoxProps, 'orientation' | 'background' | 'justify' | 'align'> & {
 		loading?: 'eager' | 'lazy'
 	}
