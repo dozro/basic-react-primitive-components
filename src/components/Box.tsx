@@ -92,7 +92,6 @@ export function Box({
 			style={{ ...gapStyle, ...props.style }}
 			data-has-gap={gap > 0 ? 'true' : undefined}
 			className={clsx(
-				styles.boxBase,
 				boxStyles({
 					variant,
 					orientation,
@@ -102,6 +101,7 @@ export function Box({
 					background,
 					className,
 				}),
+				!variant || !background ? styles.boxBase : undefined,
 			)}
 			{...props}
 		>

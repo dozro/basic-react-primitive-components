@@ -18,10 +18,14 @@ export type CardProps = BoxProps & VariantProps<typeof cardStyles> & {}
 export const Card = ({ children, className, noBorder, ...props }: CardProps) => (
 	<Box
 		{...props}
-		className={clsx(noBorder ? styles.noBorder : undefined, styles.cardBase, cardStyles({
-			noBorder,
-			className,
-		}))}
+		className={clsx(
+			noBorder ? styles.noBorder : undefined,
+			styles.cardBase,
+			cardStyles({
+				noBorder,
+				className,
+			}),
+		)}
 	>
 		{children}
 	</Box>

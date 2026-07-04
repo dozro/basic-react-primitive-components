@@ -1,7 +1,7 @@
 .boxBase {
-	background-color: var(--rylib-color-background-light);
+	background-color: var(--rylib-color-surface-light);
 
 	@media (prefers-color-scheme: dark) {
-		background-color: var(--rylib-color-background-dark);
+		background-color: var(--rylib-color-surface-dark);
 	}
 }

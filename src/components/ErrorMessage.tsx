@@ -27,13 +27,13 @@ export function ErrorMessage({ error, variant, ...props }: ErrorMessageProps) {
 	return (
 		<Box
 			{...props}
-			style={{
-				...styles.errorMessageBase,
-				...(variant === 'critical' ? styles.critical : undefined),
-				...(variant === 'warning' ? styles.warning : undefined),
-				...props.style,
-			}}
-			className={clsx(errorMessageStyles({ variant }), props.className)}
+			className={clsx(
+				errorMessageStyles({ variant }),
+				styles.errorMessageBase,
+				variant === 'critical' ? styles.critical : undefined,
+				variant === 'warning' ? styles.warning : undefined,
+				props.className,
+			)}
 		>
 			<Text>{error.message}</Text>
 		</Box>

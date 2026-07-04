@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 import dts from 'rollup-plugin-dts'
 import { readFileSync } from 'node:fs'
-import terser from "@rollup/plugin-terser";
+import terser from '@rollup/plugin-terser'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const pkg = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf-8'))
@@ -20,10 +20,10 @@ const isExternal = (id) => {
 	if (id.includes('@phosphor-icons/react')) {
 		return false
 	}
-	if (id.includes('clsx')){
+	if (id.includes('clsx')) {
 		return false
 	}
-	if (id.includes('tailwind-variants')){
+	if (id.includes('tailwind-variants')) {
 		return false
 	}
 	if (path.isAbsolute(id)) {
@@ -78,15 +78,22 @@ export default defineConfig([
 			}),
 			resolve({
 				extensions: ['.ts', '.tsx', '.d.ts', '.scss'],
-				resolveOnly: ['@phosphor-icons/react', /^@phosphor-icons\/react\/.*?/, 'clsx', /^clsx\/.*?/, 'tailwind-variants', /^tailwind-variants\/.*?/],
+				resolveOnly: [
+					'@phosphor-icons/react',
+					/^@phosphor-icons\/react\/.*?/,
+					'clsx',
+					/^clsx\/.*?/,
+					'tailwind-variants',
+					/^tailwind-variants\/.*?/,
+				],
 			}),
 			terser({
-      compress: true,
-      mangle: true,
-      format: {
-        comments: false,
-      },
-    }),
+				compress: true,
+				mangle: true,
+				format: {
+					comments: false,
+				},
+			}),
 			commonjs(),
 			typescript({
 				tsconfig: './tsconfig.json',
@@ -131,7 +138,14 @@ export default defineConfig([
 			}),
 			resolve({
 				extensions: ['.ts', '.tsx', '.d.ts', '.scss'],
-				resolveOnly: ['@phosphor-icons/react', /^@phosphor-icons\/react\/.*?/, 'clsx', /^clsx\/.*?/, 'tailwind-variants', /^tailwind-variants\/.*?/	],
+				resolveOnly: [
+					'@phosphor-icons/react',
+					/^@phosphor-icons\/react\/.*?/,
+					'clsx',
+					/^clsx\/.*?/,
+					'tailwind-variants',
+					/^tailwind-variants\/.*?/,
+				],
 			}),
 			dts(),
 		],

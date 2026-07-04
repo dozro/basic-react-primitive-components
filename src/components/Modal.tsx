@@ -59,7 +59,11 @@ export const Modal = ({
 				orientation="none"
 				id={`${id}_modal_box`}
 				{...props}
-				className={clsx(MODALSTYLES.modalBase, modalStyles({ variant: 'default' }), props.className)}
+				className={clsx(
+					MODALSTYLES.modalBase,
+					modalStyles({ variant: 'default' }),
+					props.className,
+				)}
 			>
 				{modalTitle && <Box>{modalTitle}</Box>}
 				{modalSubTitle && <Box>{modalSubTitle}</Box>}
