@@ -3,6 +3,7 @@ import { Text } from '$components/Text'
 import React from 'react'
 import styles from '../styles/ErrorMessage.module.scss'
 import { tv, type VariantProps } from 'tailwind-variants'
+import clsx from 'clsx'
 
 const errorMessageStyles = tv({
 	base: styles.errorMessageBase,
@@ -24,7 +25,16 @@ export type ErrorMessageProps = BoxProps &
 
 export function ErrorMessage({ error, variant, ...props }: ErrorMessageProps) {
 	return (
-		<Box {...props} className={errorMessageStyles({ variant })}>
+		<Box
+			{...props}
+			style={{
+				...styles.errorMessageBase,
+				...(variant === 'critical' ? styles.critical : undefined),
+				...(variant === 'warning' ? styles.warning : undefined),
+				...props.style,
+			}}
+			className={clsx(errorMessageStyles({ variant }), props.className)}
+		>
 			<Text>{error.message}</Text>
 		</Box>
 	)

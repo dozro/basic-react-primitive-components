@@ -1,10 +1,11 @@
 import { generateShortId } from '@1ry/short-id'
 import { tv, type VariantProps } from 'tailwind-variants'
+import { clsx } from 'clsx'
 import React, { Children, HTMLAttributes, ReactNode, useMemo } from 'react'
 import styles from '../styles/Box.module.scss'
 
 const boxStyles = tv({
-	base: ['transition-all duration-200', styles.boxBase],
+	base: ['transition-all duration-200'],
 	variants: {
 		variant: {
 			default: '',
@@ -90,15 +91,18 @@ export function Box({
 			id={id}
 			style={{ ...gapStyle, ...props.style }}
 			data-has-gap={gap > 0 ? 'true' : undefined}
-			className={boxStyles({
-				variant,
-				orientation,
-				align,
-				justify,
-				isolate,
-				className,
-				background,
-			})}
+			className={clsx(
+				styles.boxBase,
+				boxStyles({
+					variant,
+					orientation,
+					align,
+					justify,
+					isolate,
+					background,
+					className,
+				}),
+			)}
 			{...props}
 		>
 			{children}

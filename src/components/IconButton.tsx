@@ -33,7 +33,12 @@ export function IconButton({
 }: IconButtonProps) {
 	const id = useMemo(() => customId ?? generateShortId(7), [customId])
 	return (
-		<Button name={id} className={inputButtonStyles({ variant: 'default' })} {...props}>
+		<Button
+			name={id}
+			style={{ ...ibStyles.iconButtonBase, ...props.style }}
+			className={inputButtonStyles({ variant: 'default' })}
+			{...props}
+		>
 			{children}
 			{label && (
 				<Text htmlFor={id} paddingBefore="10" as="label" variant="wavy">

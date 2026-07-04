@@ -11,7 +11,6 @@ import { tv, type VariantProps } from 'tailwind-variants'
 type AllowedElements = 'p' | 'span' | 'label' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 
 const textStyles = tv({
-	base: [styles.TextComponent],
 	variants: {
 		variant: VARIANT_MAP,
 		paddingBefore: PADDING_MAP,
@@ -51,6 +50,7 @@ export function Text<T extends AllowedElements = 'span'>({
 					size,
 					className,
 				}),
+				styles.textBase,
 			)}
 			{...props}
 		>

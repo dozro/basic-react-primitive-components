@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import styles from '../styles/Button.module.scss'
 import { generateShortId } from '@1ry/short-id'
 import type { ButtonHTMLAttributes } from 'react'
@@ -47,13 +48,37 @@ export function Button({
 	})
 	if (asSubmit) {
 		return (
-			<button type="submit" className={cname} title={title} id={id} {...props}>
+			<button
+				style={{
+					...styles.buttonBase,
+					...props.style,
+				}}
+				type="submit"
+				className={clsx(cname, styles.submitButton)}
+				title={title}
+				id={id}
+				{...props}
+			>
 				{children}
 			</button>
 		)
 	}
 	return (
-		<button className={cname} title={title} id={id} {...props}>
+		<button
+			style={{
+				...styles.buttonBase,
+				...props.style,
+			}}
+			className={clsx(
+				cname,
+				glowing ? styles.glow : undefined,
+				transparent ? styles.transparent : undefined,
+				noBorder ? styles.noBorder : undefined,
+			)}
+			title={title}
+			id={id}
+			{...props}
+		>
 			{children}
 		</button>
 	)

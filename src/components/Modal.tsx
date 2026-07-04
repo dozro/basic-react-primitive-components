@@ -5,9 +5,9 @@ import { generateShortId } from '@1ry/short-id'
 import React, { ReactNode, useMemo } from 'react'
 import { tv, type VariantProps } from 'tailwind-variants'
 import MODALSTYLES from '../styles/Modal.module.scss'
+import clsx from 'clsx'
 
 const modalStyles = tv({
-	base: [MODALSTYLES.modalBase],
 	variants: {
 		variant: {
 			default: '',
@@ -51,12 +51,15 @@ export const Modal = ({
 }: ModalProps) => {
 	const id = useMemo(() => customId ?? generateShortId(7), [customId])
 	return (
-		<dialog id={id} className={modalStyles({ variant: 'default' })}>
+		<dialog
+			id={id}
+			className={clsx(MODALSTYLES.modalBase, modalStyles({ variant: 'default' }), props.className)}
+		>
 			<Box
 				orientation="none"
 				id={`${id}_modal_box`}
 				{...props}
-				className={modalStyles({ variant: 'default' })}
+				className={clsx(MODALSTYLES.modalBase, modalStyles({ variant: 'default' }), props.className)}
 			>
 				{modalTitle && <Box>{modalTitle}</Box>}
 				{modalSubTitle && <Box>{modalSubTitle}</Box>}
