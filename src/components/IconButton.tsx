@@ -3,7 +3,7 @@ import { Text } from '$components/Text'
 import { generateShortId } from '@1ry/short-id'
 import React, { ReactNode, useMemo } from 'react'
 import { tv, type VariantProps } from 'tailwind-variants'
-import ibStyles from '$styles/IconButton.module.scss'
+import ibStyles from '../styles/IconButton.module.scss'
 
 const inputButtonStyles = tv({
 	base: [ibStyles.iconButtonBase],

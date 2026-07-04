@@ -1,6 +1,6 @@
 import { FONT_MAP } from '$types/TextFont'
 
-import styles from '$styles/Text.module.scss'
+import styles from '../styles/Text.module.scss'
 import React, { ComponentPropsWithoutRef, ElementType } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { VARIANT_MAP } from '$types/TextVariant'

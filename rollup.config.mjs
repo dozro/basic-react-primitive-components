@@ -16,7 +16,13 @@ const isExternal = (id) => {
 	if (id.startsWith('.') || id.startsWith('$') || id.startsWith('src/')) {
 		return false
 	}
+	if (id.includes('@phosphor-icons/react')) {
+		return false
+	}
 	if (path.isAbsolute(id)) {
+		if (id.startsWith(__dirname)) {
+			return false
+		}
 		return id.includes('node_modules')
 	}
 	return true
@@ -54,14 +60,19 @@ export default defineConfig([
 					{ find: '$styles', replacement: path.resolve(__dirname, 'src/styles') },
 				],
 			}),
-			resolve({ extensions: ['.ts', '.tsx', '.d.ts', '.scss'] }),
-			,
-			commonjs(),
 			postcss({
 				extract: 'index.css',
 				minimize: true,
+				modules: true,
+				extensions: ['.scss', '.css'],
 				use: [['sass', { silenceDeprecations: ['legacy-js-api'] }]],
+				writeDefinitions: false,
 			}),
+			resolve({
+				extensions: ['.ts', '.tsx', '.d.ts', '.scss'],
+				resolveOnly: ['@phosphor-icons/react', /^@phosphor-icons\/react\/.*?/],
+			}),
+			commonjs(),
 			typescript({
 				tsconfig: './tsconfig.json',
 				declaration: false,
@@ -103,7 +114,10 @@ export default defineConfig([
 				],
 				customResolver: resolve({ extensions: ['.ts', '.tsx', '.d.ts'] }),
 			}),
-			resolve({ extensions: ['.ts', '.tsx', '.d.ts', '.scss'] }),
+			resolve({
+				extensions: ['.ts', '.tsx', '.d.ts', '.scss'],
+				resolveOnly: ['@phosphor-icons/react', /^@phosphor-icons\/react\/.*?/],
+			}),
 			dts(),
 		],
 	},

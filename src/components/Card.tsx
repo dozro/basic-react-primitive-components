@@ -1,10 +1,10 @@
 import { BoxProps, Box } from '$components/Box'
-import styles from '$styles/Card.module.scss'
+import styles from '../styles/Card.module.scss'
 import React from 'react'
 import { tv, type VariantProps } from 'tailwind-variants'
 
 const cardStyles = tv({
-	base: styles.cardBase,
+	base: ['transition-all duration-200', styles.cardBase],
 	variants: {
 		noBorder: {
 			true: styles.noBorder,

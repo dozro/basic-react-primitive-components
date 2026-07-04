@@ -1,5 +1,5 @@
 .iconButtonBase {
-	color: black;
+	color: var(--rylib-color-primary-light);
 	background: transparent;
 	border: none;
 	cursor: pointer;
@@ -14,7 +14,7 @@
 		background-color 0.15s ease;
 
 	@media (prefers-color-scheme: dark) {
-		color: white;
+		color: var(--rylib-color-primary-dark);
 	}
 
 	&:hover {
@@ -23,10 +23,10 @@
 
 	&:active {
 		transform: translateY(0);
-		box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 3px 8px var(--rylib-color-secondary-light);
 
 		@media (prefers-color-scheme: dark) {
-			box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+			box-shadow: 0 3px 8px var(--rylib-color-secondary-dark);
 		}
 	}
 
@@ -36,8 +36,20 @@
 	}
 	&.glow {
 		&:hover {
-			background: linear-gradient(135deg, #ff8c00, #ff3c00);
-			box-shadow: 0 0 20px rgba(255, 140, 0, 0.8);
+			background: linear-gradient(
+				135deg,
+				var(--rylib-color-accent-light),
+				var(--rylib-color-secondaryaccent-light)
+			);
+			box-shadow: 0 0 20px var(--rylib-color-accent-light);
+			@media (prefers-color-scheme: dark) {
+				background: linear-gradient(
+					135deg,
+					var(--rylib-color-accent-dark),
+					var(--rylib-color-secondaryaccent-dark)
+				);
+				box-shadow: 0 0 20px var(--rylib-color-accent-dark);
+			}
 		}
 	}
 }

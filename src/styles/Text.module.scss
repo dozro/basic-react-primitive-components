@@ -1,8 +1,8 @@
 .TextComponent {
-	color: black;
+	color: var(--rylib-color-primary-light);
 	font-family: 'Roboto', sans-serif;
 
 	@media (prefers-color-scheme: dark) {
-		color: white;
+		color: var(--rylib-color-primary-dark);
 	}
 }

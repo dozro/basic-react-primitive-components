@@ -1,9 +1,10 @@
 import { generateShortId } from '@1ry/short-id'
 import { tv, type VariantProps } from 'tailwind-variants'
 import React, { Children, HTMLAttributes, ReactNode, useMemo } from 'react'
+import styles from '../styles/Box.module.scss'
 
 const boxStyles = tv({
-	base: 'transition-all duration-200',
+	base: ['transition-all duration-200', styles.boxBase],
 	variants: {
 		variant: {
 			default: '',

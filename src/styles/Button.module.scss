@@ -1,8 +1,8 @@
 .buttonBase {
-	color: black;
+	color: var(--rylib-color-primary-light);
 	cursor: pointer;
 	border-style: groove;
-	border-color: black;
+	border-color: var(--rylib-color-primary-light);
 
 	display: inline-flex;
 	align-items: center;
@@ -14,8 +14,8 @@
 		background-color 0.15s ease;
 
 	@media (prefers-color-scheme: dark) {
-		color: white;
-		border-color: white;
+		color: var(--rylib-color-primary-dark);
+		border-color: var(--rylib-color-primary-dark);
 	}
 
 	&:hover {
@@ -37,8 +37,20 @@
 	}
 	&.glow {
 		&:hover {
-			background: linear-gradient(135deg, #ff8c00, #ff3c00);
-			box-shadow: 0 0 20px rgba(255, 140, 0, 0.8);
+			background: linear-gradient(
+				135deg,
+				var(--rylib-color-accent-light),
+				var(--rylib-color-secondaryaccent-light)
+			);
+			box-shadow: 0 0 20px var(--rylib-color-accent-light);
+			@media (prefers-color-scheme: dark) {
+				background: linear-gradient(
+					135deg,
+					var(--rylib-color-accent-dark),
+					var(--rylib-color-secondaryaccent-dark)
+				);
+				box-shadow: 0 0 20px var(--rylib-color-accent-dark);
+			}
 		}
 	}
 	&.no-border {

@@ -1,7 +1,7 @@
 import { Box, BoxProps } from '$components/Box'
 import { Text } from '$components/Text'
 import React from 'react'
-import styles from '$styles/ErrorMessage.module.scss'
+import styles from '../styles/ErrorMessage.module.scss'
 import { tv, type VariantProps } from 'tailwind-variants'
 
 const errorMessageStyles = tv({

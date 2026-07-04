@@ -5,7 +5,7 @@
 		/* Basic Options */
 		// "incremental": true,                         /* Enable incremental compilation */
 		"target": "esnext",
-		"module": "node16",
+		"module": "preserve",
 		// "lib": [],                                   /* Specify library files to be included in the compilation. */
 		// "allowJs": true,                             /* Allow javascript files to be compiled. */
 		// "checkJs": true,                             /* Report errors in .js files. */
@@ -43,7 +43,7 @@
 		// "noPropertyAccessFromIndexSignature": true,  /* Require undeclared properties from index signatures to use element accesses. */
 
 		/* Module Resolution Options */
-		"moduleResolution": "node16",
+		"moduleResolution": "bundler",
 		"ignoreDeprecations": "6.0",
 		"baseUrl": ".",
 		"paths": {

@@ -7,6 +7,9 @@ export { IconButton } from '$components/IconButton'
 export { Text } from '$components/Text'
 export { Input } from '$components/Input'
 export { Modal } from '$components/Modal'
+export * from '$components/LibProvider'
+export * from '$components/Lazy'
+export * from '$components/InfoRow'
 
 // props
 export { BoxProps } from '$components/Box'

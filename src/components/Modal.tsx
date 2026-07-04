@@ -4,7 +4,7 @@ import { Text } from '$components/Text'
 import { generateShortId } from '@1ry/short-id'
 import React, { ReactNode, useMemo } from 'react'
 import { tv, type VariantProps } from 'tailwind-variants'
-import MODALSTYLES from '$styles/Modal.module.scss'
+import MODALSTYLES from '../styles/Modal.module.scss'
 
 const modalStyles = tv({
 	base: [MODALSTYLES.modalBase],
