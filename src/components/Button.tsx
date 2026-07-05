@@ -127,15 +127,12 @@ export function Button({
 	}
 	return (
 		<button
-			style={{
-				...styles.buttonBase,
-				...props.style,
-			}}
 			className={clsx(
 				cname,
 				glowing ? styles.glow : undefined,
 				transparent ? styles.transparent : undefined,
 				noBorder ? styles.noBorder : undefined,
+				styles.buttonBase,
 			)}
 			title={title}
 			id={id}

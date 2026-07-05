@@ -50,6 +50,14 @@ export const boxStylesConfig = {
 			red: 'bg-red-500 dark:bg-red-900',
 		},
 		/**
+		 * whether the box should be allowed to grow
+		 * @default true
+		 */
+		grow: {
+			true: 'grow',
+			false: 'grow-0',
+		},
+		/**
 		 * Cross-axis flex alignments and text alignments.
 		 * Includes safe fallbacks for edge cases when elements are gapped.
 		 * @example "left"
@@ -107,6 +115,7 @@ export const boxStylesConfig = {
 		orientation: 'none',
 		align: 'none',
 		justify: 'none',
+		grow: 'true',
 	},
 } as const
 
