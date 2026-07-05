@@ -1,8 +1,8 @@
 /** @type { import('typedoc').TypeDocOptionMap } */
 export default {
-	entryPoints: ['./src/**/*.ts'],
+	entryPoints: ['./src/**/*.ts', './src/**/*.tsx'],
 	tsconfig: 'tsconfig.json',
-	out: './public/docs',
+	out: './docs',
 	name: 'RyLib - React Primitive Components',
 	includeVersion: true,
 	exclude: ['**/*.test.ts', '**/*.spec.ts', 'node_modules', '**/*.stories.tsx', '**/*.stories.ts'],
