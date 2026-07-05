@@ -6,9 +6,9 @@ import postcss from 'rollup-plugin-postcss'
 import alias from '@rollup/plugin-alias'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
-import dts from 'rollup-plugin-dts'
 import { readFileSync } from 'node:fs'
-import terser from '@rollup/plugin-terser'
+import { globSync } from 'glob'
+import virtual from '@rollup/plugin-virtual';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const pkg = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf-8'))
@@ -26,6 +26,9 @@ const isExternal = (id) => {
 	if (id.includes('tailwind-variants')) {
 		return false
 	}
+	if (id.includes('virtual-root-index.ts')) {
+		return false
+	}
 	if (path.isAbsolute(id)) {
 		if (id.startsWith(__dirname)) {
 			return false
@@ -35,15 +38,28 @@ const isExternal = (id) => {
 	return true
 }
 
+const inputFiles = globSync(['src/**/*.ts', 'src/**/*.tsx'], {
+	ignore: ['src/**/*.d.ts', 'src/**/*.test.ts', 'src/**/*.stories.ts', 'src/**/*.stories.tsx', 'src/**/*.spec.ts']
+});
+
+const inputObject = Object.fromEntries(
+	inputFiles.map(file => [
+		path.relative('src', file).replace(/\.[^/.]+$/, ""), // schneidet .ts/.tsx ab
+		file
+	])
+);
+
 export default defineConfig([
 	{
-		input: 'src/index.ts',
+		input: inputObject,
 		output: [
 			{
 				dir: 'lib',
 				format: 'cjs',
-				entryFileNames: '[name].js',
-				preserveModules: false,
+				entryFileNames: (chunkInfo) => {
+					return '[name].js';
+				},
+				preserveModules: true,
 				preserveModulesRoot: 'src',
 				sourcemap: true,
 				exports: 'named',
@@ -53,7 +69,9 @@ export default defineConfig([
 			{
 				dir: 'lib',
 				format: 'esm',
-				entryFileNames: '[name].mjs',
+				entryFileNames: (chunkInfo) => {
+					return '[name].mjs';
+				},
 				preserveModules: true,
 				preserveModulesRoot: 'src',
 				sourcemap: true,
@@ -87,25 +105,11 @@ export default defineConfig([
 					/^tailwind-variants\/.*?/,
 				],
 			}),
-			terser({
-				compress: {
-					inline: 1,
-					unsafe_arrows: true,
-				},
-				mangle: true,
-				format: {
-					comments: 'some',
-					preamble: `/* ${pkg.name} v${pkg.version} | (c) 2024 Rye | Apache 2.0 License */`,
-					webkit: true,
-				},
-				ie8: true,
-				safari10: true,
-			}),
 			commonjs(),
 			typescript({
 				tsconfig: './tsconfig.json',
-				declaration: false,
-				declarationMap: false,
+				declaration: true,
+				declarationMap: true,
 				outDir: './lib',
 				compilerOptions: {
 					composite: false,
@@ -121,40 +125,45 @@ export default defineConfig([
 					'./lib/**',
 				],
 			}),
-		],
-	},
-	{
-		input: 'src/index.ts',
-		output: [
 			{
-				file: 'lib/index.d.ts',
-				format: 'esm',
-			},
-		],
-		external: (id) =>
-			!id.startsWith('.') && !id.startsWith('$') && !id.startsWith('src/') && !path.isAbsolute(id),
-		plugins: [
-			alias({
-				entries: [
-					{ find: '$components', replacement: path.resolve(__dirname, 'src/components') },
-					{ find: '$types', replacement: path.resolve(__dirname, 'src/types') },
-					{ find: '$styles', replacement: path.resolve(__dirname, 'src/styles') },
-					{ find: '$utils', replacement: path.resolve(__dirname, 'src/utils') },
-				],
-				customResolver: resolve({ extensions: ['.ts', '.tsx', '.d.ts'] }),
-			}),
-			resolve({
-				extensions: ['.ts', '.tsx', '.d.ts', '.scss'],
-				resolveOnly: [
-					'@phosphor-icons/react',
-					/^@phosphor-icons\/react\/.*?/,
-					'clsx',
-					/^clsx\/.*?/,
-					'tailwind-variants',
-					/^tailwind-variants\/.*?/,
-				],
-			}),
-			dts(),
+				name: 'generate-output-index',
+				generateBundle(options, bundle) {
+					const files = Object.keys(bundle).filter(fileName =>
+						fileName.endsWith('.js') || fileName.endsWith('.mjs')
+					);
+
+					const cjsRequires = [];
+					const esmExports = [];
+					const dtsExports = [];
+
+					inputFiles.forEach(file => {
+						const relPath = path.relative('src', file).replace(/\.[^/.]+$/, "");
+						cjsRequires.push(`    require('./${relPath}.js')`);
+						esmExports.push(`export * from './${relPath}.mjs';`);
+						dtsExports.push(`export * from './${relPath}.d.ts';`);
+					});
+
+					const cjsSource = cjsRequires.length > 0
+						? `Object.assign(\n  module.exports,\n${cjsRequires.join(',\n')}\n);\n`
+						: 'module.exports = {};\n';
+
+					this.emitFile({
+						type: 'asset',
+						fileName: 'index.js',
+						source: cjsSource
+					});
+					this.emitFile({
+						type: 'asset',
+						fileName: 'index.mjs',
+						source: esmExports.join('\n')
+					});
+					this.emitFile({
+						type: 'asset',
+						fileName: 'index.d.ts',
+						source: dtsExports.join('\n')
+					});
+				}
+			}
 		],
 	},
 ])

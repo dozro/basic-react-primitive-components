@@ -7,6 +7,7 @@ const meta: Meta<typeof ErrorMessage> = {
 	tags: ['autodocs'],
 	args: {
 		error: new Error('Subraum-Verzerrung im Core-Antrieb festgestellt!'),
+		// @ts-ignore
 		variant: 'critical',
 	},
 	argTypes: {
@@ -24,6 +25,7 @@ export const Critical: Story = {}
 
 export const Warning: Story = {
 	args: {
+		// @ts-ignore
 		variant: 'warning',
 		error: new Error('Heizsequenz verzögert sich um 10 Sekunden.'),
 	},

@@ -25,6 +25,10 @@ export interface RyThemeConfig {
 	 * @example { lightColor: "#FF0000", darkColor: "#00FF00" }
 	 */
 	primaryColor?: RyColorConfig
+	/**
+	 * The secondary color of the library.
+	 * @example { lightColor: "#0000FF", darkColor: "#FFFF00" }
+	 */
 	secondaryColor?: RyColorConfig
 	/**
 	 * The accent color of the library.
@@ -33,13 +37,37 @@ export interface RyThemeConfig {
 	 */
 	accentColor?: RyColorConfig
 	secondaryAccentColor?: RyColorConfig
+	/**
+	 * The success color of the library.
+	 * This will be used for success messages, success icons, and other components that use the success color.
+	 * @example { lightColor: "#00FF00", darkColor: "#FF0000" }
+	 */
 	successColor?: RyColorConfig
+	/**
+	 * The warning color of the library.
+	 * This will be used for warning messages, warning icons, and other components that use the warning color.
+	 * @example { lightColor: "#FFFF00", darkColor: "#FF8C00" }
+	 */
 	warningColor?: RyColorConfig
+	/**
+	 * The error color of the library.
+	 * This will be used for error messages, error icons, and other components that use the error color.
+	 * @example { lightColor: "#FF0000", darkColor: "#DC3545" }
+	 */
 	errorColor?: RyColorConfig
+	/**
+	 * The info color of the library.
+	 * This will be used for info messages, info icons, and other components that use the info color.
+	 * @example { lightColor: "#17A2B8", darkColor: "#138496" }
+	 */
 	infoColor?: RyColorConfig
 	neutralColor?: RyColorConfig
 	surfaceColor?: RyColorConfig
 	backgroundColor?: RyColorConfig
+}
+
+export interface RyLibBrandingCustomization {
+	lazyLoadingText?: string
 }
 
 /**
@@ -47,7 +75,7 @@ export interface RyThemeConfig {
  */
 export interface RyLibConfig {
 	theme: RyThemeConfig
-	lazyLoadingText?: string
+	customization?: RyLibBrandingCustomization
 }
 
 const defaultThemeDefaults: Record<keyof RyThemeConfig, { light: string; dark: string }> = {
@@ -71,6 +99,44 @@ export interface RyLibProviderProps {
 	children: ReactNode
 }
 
+/**
+ * Context provider component that initializes and manages the `RyLib` configuration
+ * and dynamically injects theme colors as CSS custom properties (variables).
+ *
+ * ### Behavior
+ * - Wraps the children with `RyLibConfigContext.Provider` to expose the configuration globally.
+ * - Injects theme styles onto a root `div` element via a React `useRef`.
+ * - Automatically updates the CSS custom properties whenever the `config.theme` reference changes.
+ *
+ * ### Generated CSS Variables
+ * For each theme key (e.g., `primaryColor`), it strips the 'Color' suffix, converts it to lowercase,
+ * and sets the following CSS variables on the root container:
+ * - `--rylib-color-[name]-light`
+ * - `--rylib-color-[name]-dark`
+ *
+ * @example
+ * ```tsx
+ * const myConfig: RyLibProviderProps['config'] = {
+ *   theme: {
+ *     primaryColor: { lightColor: '#3490dc', darkColor: '#1d68a7' }
+ *   }
+ * };
+ *
+ * const App = () => (
+ *   <RyLibProvider config="{myConfig}">
+ *     <MyComponent/>
+ *   </RyLibProvider>
+ * );
+ * ```
+ *
+ * @param props - The component properties.
+ * @param props.config - The global configuration object containing the theme settings.
+ * @param props.children - The child components that will have access to the context and themed styles.
+ *
+ * @returns A context provider wrapped around a themed root `div` element.
+ *
+ * @author Rye
+ */
 export const RyLibProvider: FC<RyLibProviderProps> = ({ config, children }: RyLibProviderProps) => {
 	const containerRef = useRef<HTMLDivElement>(null)
 
@@ -103,8 +169,14 @@ export const RyLibProvider: FC<RyLibProviderProps> = ({ config, children }: RyLi
 	)
 }
 
-export const useRyLibConfig = (): RyLibConfig => {
+/**
+ * Returns the current library configuration from the context.
+ * If the context is not available, it returns `null`.
+ * @returns the config is existent
+ * @see {@link RyLibProvider}
+ */
+export const useRyLibConfig = (): RyLibConfig | null => {
 	const context = useContext(RyLibConfigContext)
-	if (!context) throw new Error('useRyLibConfig must be used within a RyLibProvider')
+	if (!context) return null
 	return context
 }
