@@ -2,7 +2,7 @@ import React, { Suspense, ComponentType } from 'react'
 import { InfoRow } from '$components/InfoRow'
 import { Text } from '$components/Text'
 import { SpinnerBallIcon } from '@phosphor-icons/react'
-import { useRyLibConfig } from './LibProvider'
+import { RyLibConfig, useRyLibConfig } from './LibProvider'
 
 interface LazyProps {
 	component: ComponentType
@@ -14,11 +14,8 @@ interface LazyProps {
  * @author Rye
  */
 export const Lazy = ({ component: Component, loadingText }: LazyProps) => {
-	const config = useRyLibConfig()
-	if (!config?.customization) {
-		throw new Error('Lazy component must be used within a RyLibProvider')
-	}
-	const { lazyLoadingText: configLazyLoadingText } = config!.customization
+	const config:RyLibConfig | null = useRyLibConfig()
+	const { lazyLoadingText: configLazyLoadingText } = config?.customization || {}
 	const lazyLoadingFallbackText =
 		loadingText ?? configLazyLoadingText ?? 'loading component....... meow'
 	return (

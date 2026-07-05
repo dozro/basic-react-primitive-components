@@ -51,11 +51,11 @@ export const boxStylesConfig = {
 		},
 		/**
 		 * whether the box should be allowed to grow
-		 * @default true
+		 * @default yes
 		 */
 		grow: {
-			true: 'grow',
-			false: 'grow-0',
+			yes: 'grow',
+			no: 'grow-0',
 		},
 		/**
 		 * Cross-axis flex alignments and text alignments.
@@ -115,7 +115,7 @@ export const boxStylesConfig = {
 		orientation: 'none',
 		align: 'none',
 		justify: 'none',
-		grow: 'true',
+		grow: 'yes',
 	},
 } as const
 
