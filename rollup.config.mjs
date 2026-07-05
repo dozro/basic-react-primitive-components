@@ -8,27 +8,19 @@ import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 import { readFileSync } from 'node:fs'
 import { globSync } from 'glob'
-import virtual from '@rollup/plugin-virtual'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const pkg = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf-8'))
 
 const isExternal = (id) => {
-	if (id.startsWith('.') || id.startsWith('$') || id.startsWith('src/')) {
+	if (id.startsWith('.') || id.startsWith('$') || id.startsWith('src/')) return false
+	if (
+		id.includes('@phosphor-icons/react') ||
+		id.includes('clsx') ||
+		id.includes('tailwind-variants')
+	)
 		return false
-	}
-	if (id.includes('@phosphor-icons/react')) {
-		return false
-	}
-	if (id.includes('clsx')) {
-		return false
-	}
-	if (id.includes('tailwind-variants')) {
-		return false
-	}
-	if (id.includes('virtual-root-index.ts')) {
-		return false
-	}
+	if (id.includes('katex')) return false
 	if (path.isAbsolute(id)) {
 		if (id.startsWith(__dirname)) {
 			return false

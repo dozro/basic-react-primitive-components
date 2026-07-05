@@ -1,29 +1,24 @@
-import React, { type ComponentPropsWithoutRef, type ReactNode, type ReactElement } from 'react'
+import React, { type ReactNode, type ReactElement } from 'react'
 import { tv, VariantProps } from 'tailwind-variants'
 import { Box, BoxProps } from '$components/Box'
-import { SIZE_MAP, type TextSize } from '$types/TextSizing'
 import { clsx } from 'clsx'
+import { textStylesConfig } from '$components/Text'
 
-const infoRowStyles = tv({
+export const infoRowStylesConfig = {
 	base: 'InfoRowComp items-center gap-2 sticky text-neutral-600',
 	variants: {
-		size: {
-			xs: SIZE_MAP.xs,
-			small: SIZE_MAP.small,
-			base: SIZE_MAP.base,
-			large: SIZE_MAP.large,
-			xl: SIZE_MAP.xl,
-			'2xl': SIZE_MAP['2xl'],
-		},
+		size: textStylesConfig.variants.size,
 		border: {
 			true: 'border border-neutral-300 dark:border-neutral-700 rounded-md p-2',
 		},
 	},
 	defaultVariants: {
-		size: 'base',
+		size: textStylesConfig.defaultVariants.size,
 		border: false,
 	},
-})
+} as const
+
+const infoRowStyles = tv(infoRowStylesConfig)
 
 type InfoRowProps = BoxProps & {
 	icon: ReactElement

@@ -14,7 +14,7 @@ interface LazyProps {
  * @author Rye
  */
 export const Lazy = ({ component: Component, loadingText }: LazyProps) => {
-	const config:RyLibConfig | null = useRyLibConfig()
+	const config: RyLibConfig | null = useRyLibConfig()
 	const { lazyLoadingText: configLazyLoadingText } = config?.customization || {}
 	const lazyLoadingFallbackText =
 		loadingText ?? configLazyLoadingText ?? 'loading component....... meow'
