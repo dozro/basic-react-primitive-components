@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 import { readFileSync } from 'node:fs'
 import { globSync } from 'glob'
-import virtual from '@rollup/plugin-virtual';
+import virtual from '@rollup/plugin-virtual'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const pkg = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf-8'))
@@ -39,15 +39,21 @@ const isExternal = (id) => {
 }
 
 const inputFiles = globSync(['src/**/*.ts', 'src/**/*.tsx'], {
-	ignore: ['src/**/*.d.ts', 'src/**/*.test.ts', 'src/**/*.stories.ts', 'src/**/*.stories.tsx', 'src/**/*.spec.ts']
-});
+	ignore: [
+		'src/**/*.d.ts',
+		'src/**/*.test.ts',
+		'src/**/*.stories.ts',
+		'src/**/*.stories.tsx',
+		'src/**/*.spec.ts',
+	],
+})
 
 const inputObject = Object.fromEntries(
-	inputFiles.map(file => [
-		path.relative('src', file).replace(/\.[^/.]+$/, ""), // schneidet .ts/.tsx ab
-		file
-	])
-);
+	inputFiles.map((file) => [
+		path.relative('src', file).replace(/\.[^/.]+$/, ''), // schneidet .ts/.tsx ab
+		file,
+	]),
+)
 
 export default defineConfig([
 	{
@@ -57,7 +63,7 @@ export default defineConfig([
 				dir: 'lib',
 				format: 'cjs',
 				entryFileNames: (chunkInfo) => {
-					return '[name].js';
+					return '[name].js'
 				},
 				preserveModules: true,
 				preserveModulesRoot: 'src',
@@ -70,7 +76,7 @@ export default defineConfig([
 				dir: 'lib',
 				format: 'esm',
 				entryFileNames: (chunkInfo) => {
-					return '[name].mjs';
+					return '[name].mjs'
 				},
 				preserveModules: true,
 				preserveModulesRoot: 'src',
@@ -128,42 +134,43 @@ export default defineConfig([
 			{
 				name: 'generate-output-index',
 				generateBundle(options, bundle) {
-					const files = Object.keys(bundle).filter(fileName =>
-						fileName.endsWith('.js') || fileName.endsWith('.mjs')
-					);
+					const files = Object.keys(bundle).filter(
+						(fileName) => fileName.endsWith('.js') || fileName.endsWith('.mjs'),
+					)
 
-					const cjsRequires = [];
-					const esmExports = [];
-					const dtsExports = [];
+					const cjsRequires = []
+					const esmExports = []
+					const dtsExports = []
 
-					inputFiles.forEach(file => {
-						const relPath = path.relative('src', file).replace(/\.[^/.]+$/, "");
-						cjsRequires.push(`    require('./${relPath}.js')`);
-						esmExports.push(`export * from './${relPath}.mjs';`);
-						dtsExports.push(`export * from './${relPath}.d.ts';`);
-					});
+					inputFiles.forEach((file) => {
+						const relPath = path.relative('src', file).replace(/\.[^/.]+$/, '')
+						cjsRequires.push(`    require('./${relPath}.js')`)
+						esmExports.push(`export * from './${relPath}.mjs';`)
+						dtsExports.push(`export * from './${relPath}.d.ts';`)
+					})
 
-					const cjsSource = cjsRequires.length > 0
-						? `Object.assign(\n  module.exports,\n${cjsRequires.join(',\n')}\n);\n`
-						: 'module.exports = {};\n';
+					const cjsSource =
+						cjsRequires.length > 0
+							? `Object.assign(\n  module.exports,\n${cjsRequires.join(',\n')}\n);\n`
+							: 'module.exports = {};\n'
 
 					this.emitFile({
 						type: 'asset',
 						fileName: 'index.js',
-						source: cjsSource
-					});
+						source: cjsSource,
+					})
 					this.emitFile({
 						type: 'asset',
 						fileName: 'index.mjs',
-						source: esmExports.join('\n')
-					});
+						source: esmExports.join('\n'),
+					})
 					this.emitFile({
 						type: 'asset',
 						fileName: 'index.d.ts',
-						source: dtsExports.join('\n')
-					});
-				}
-			}
+						source: dtsExports.join('\n'),
+					})
+				},
+			},
 		],
 	},
 ])
