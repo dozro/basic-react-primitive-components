@@ -1,4 +1,5 @@
 import { generateShortId } from '@1ry/short-id'
+import clsx from 'clsx'
 import { tv, type VariantProps } from 'tailwind-variants'
 import React, { type HTMLAttributes, type ReactNode, useMemo } from 'react'
 
@@ -223,22 +224,25 @@ export function Box({
 	const id = useMemo(() => customId ?? generateShortId(7), [customId])
 	const Component = variant === 'navbar' && !as ? 'nav' : as || 'div'
 	const gapStyle = gap ? { gap: `${gap * 0.25}rem` } : undefined
+	const resolvedClassName = clsx(
+		className,
+		boxStyles({
+			variant,
+			orientation,
+			align,
+			justify,
+			isolate,
+			background,
+			grow,
+		}),
+	)
 	return (
 		<Component
+			{...props}
 			id={id}
 			style={{ ...gapStyle, ...props.style }}
 			data-has-gap={gap > 0 ? 'true' : undefined}
-			className={boxStyles({
-				variant,
-				orientation,
-				align,
-				justify,
-				isolate,
-				background,
-				grow,
-				className,
-			})}
-			{...props}
+			className={resolvedClassName}
 		>
 			{children}
 		</Component>
