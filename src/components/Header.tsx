@@ -1,10 +1,9 @@
-import React, { type ComponentPropsWithoutRef, type ReactNode } from 'react'
+import React, { type ReactNode } from 'react'
 import Box, { type BoxProps } from '$components/Box'
 
-type HeaderProps = ComponentPropsWithoutRef<'header'> &
-	BoxProps & {
-		children?: ReactNode
-	}
+type HeaderProps = BoxProps & {
+	children?: ReactNode
+}
 
 const Header = ({ children, ...props }: HeaderProps) => {
 	return (
