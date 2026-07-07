@@ -166,9 +166,9 @@ export const boxStylesConfig = {
 	},
 	defaultVariants: {
 		noAnimation: false,
-		paddingY: '0',
-		paddingX: '0',
-		padding: '0',
+		paddingY: 'none',
+		paddingX: 'none',
+		padding: 'none',
 		background: 'none',
 		variant: 'default',
 		noBorder: true,
@@ -176,7 +176,7 @@ export const boxStylesConfig = {
 		orientation: 'none',
 		align: 'none',
 		justify: 'none',
-		grow: 'no',
+		grow: 'none',
 	},
 } as const
 
@@ -220,9 +220,7 @@ export type BoxProps = HTMLAttributes<HTMLDivElement> &
  */
 export function Box({
 	variant = 'default',
-	as,
-	className,
-	orientation,
+	as,	orientation,
 	align,
 	justify,
 	background = 'transparent',
@@ -245,7 +243,6 @@ export function Box({
 	const gapStyle = gap ? { gap: `${gap * 0.25}rem` } : undefined
 	const resolvedClassName = twMerge(
 		clsx(
-			className,
 			boxStyles({
 				variant,
 				orientation,

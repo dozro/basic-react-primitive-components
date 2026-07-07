@@ -42,6 +42,7 @@ const buttonStyles = tv(buttonStylesConfig)
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
 	VariantProps<typeof buttonStyles> & {
 		asSubmit?: boolean
+		type?: 'button' | 'submit' | 'reset'
 	}
 
 /**
@@ -95,6 +96,7 @@ export function Button({
 	transparent = true,
 	asSubmit = false,
 	title,
+	type = 'button',
 	id: customId,
 	...props
 }: ButtonProps) {
@@ -111,12 +113,15 @@ export function Button({
 	if (asSubmit) {
 		return (
 			<button
-				style={{
-					...styles.buttonBase,
-					...props.style,
-				}}
+				className={clsx(
+				cname,
+				glowing ? styles.glow : undefined,
+				transparent ? styles.transparent : undefined,
+				noBorder ? styles.noBorder : undefined,
+				styles.buttonBase,
+				styles.submitButton,
+				)}
 				type="submit"
-				className={clsx(cname, styles.submitButton)}
 				title={title}
 				id={id}
 				{...props}
@@ -136,6 +141,7 @@ export function Button({
 			)}
 			title={title}
 			id={id}
+			type={type}
 			{...props}
 		>
 			{children}
