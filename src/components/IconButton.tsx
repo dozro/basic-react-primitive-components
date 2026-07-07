@@ -4,6 +4,7 @@ import { generateShortId } from '@1ry/short-id'
 import React, { ReactNode, useMemo } from 'react'
 import { tv, type VariantProps } from 'tailwind-variants'
 import ibStyles from '../styles/IconButton.module.scss'
+import { clsx } from 'clsx'
 
 const inputButtonStyles = tv({
 	base: [ibStyles.iconButtonBase],
@@ -35,8 +36,11 @@ export function IconButton({
 	return (
 		<Button
 			name={id}
-			style={{ ...ibStyles.iconButtonBase, ...props.style }}
-			className={inputButtonStyles({ variant: 'default' })}
+			className={clsx(
+				inputButtonStyles({ variant: 'default' }),
+				className,
+				ibStyles.iconButtonBase,
+			)}
 			{...props}
 		>
 			{children}
