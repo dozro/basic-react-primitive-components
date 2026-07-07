@@ -1,7 +1,7 @@
 import 'prismjs/themes/prism-twilight.css'
 import Prism from 'prismjs'
 import * as ReactSimpleEditor from 'react-simple-code-editor'
-import React, { useState } from 'react'
+import React, { useId, useState } from 'react'
 import { Box } from '$components/Box'
 import { Text } from '$components/Text'
 
@@ -33,6 +33,7 @@ const CodeEditor = ({
 	...props
 }: CodeEditorProps) => {
 	const [code, setCode] = useState(value ?? placeholder ?? '')
+	const id = useId()
 
 	const { root, label: labelSlot, textarea } = textAreaStyles({ variant, isInvalid })
 
@@ -46,12 +47,13 @@ const CodeEditor = ({
 	return (
 		<Box className={root({ class: classNames?.root ?? className })}>
 			{label && (
-				<Text as="label" className={labelSlot({ class: classNames?.label })}>
+				<Text htmlFor={id} as="label" className={labelSlot({ class: classNames?.label })}>
 					{label}
 				</Text>
 			)}
 			<Editor
 				value={code}
+				id={id}
 				onValueChange={(code: string) => {
 					setCode(code)
 					onChange?.(code)

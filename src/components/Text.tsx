@@ -13,10 +13,10 @@ export const textStylesConfig = {
 		 * @default "default"
 		 */
 		variant: {
-			default: 'text-sm text-neutral-600',
-			title: 'text-2xl font-medium text-amber-900',
-			wavy: 'text-sm text-neutral-600 decoration-wavy',
-			muted: 'text-sm text-neutral-400',
+			default: 'text-sm text-neutral-600' as const,
+			title: 'text-2xl font-medium text-amber-900' as const,
+			wavy: 'text-sm text-neutral-600 decoration-wavy' as const,
+			muted: 'text-sm text-neutral-400' as const,
 		},
 		/**
 		 * the padding around the text, useful for spacing in layouts
@@ -78,13 +78,18 @@ export const textStylesConfig = {
 
 const textStyles = tv(textStylesConfig)
 
-export type TextProps<T extends AllowedElements> = VariantProps<typeof textStyles> & {
-	as?: T
-	/**
-	 * if you set it to as=label
-	 */
-	htmlFor?: string
-} & Omit<ComponentPropsWithoutRef<T>, 'as' | 'variant' | 'paddingBefore' | 'font' | 'size'>
+export type TextProps<T extends AllowedElements> = VariantProps<typeof textStyles> &
+	(
+		| {
+				as: 'label'
+				htmlFor: string
+		  }
+		| {
+				as?: Exclude<T, 'label'>
+				htmlFor?: never
+		  }
+	) &
+	Omit<ComponentPropsWithoutRef<T>, 'as' | 'variant' | 'paddingBefore' | 'font' | 'size'>
 
 export function Text<T extends AllowedElements = 'span'>({
 	variant = 'default',
