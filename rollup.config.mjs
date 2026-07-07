@@ -15,9 +15,7 @@ const pkg = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 
 const isExternal = (id) => {
 	if (id.startsWith('.') || id.startsWith('$') || id.startsWith('src/')) return false
 	if (
-		id.includes('@phosphor-icons/react') ||
-		id.includes('clsx') ||
-		id.includes('tailwind-variants')
+		id.includes('@phosphor-icons/react')
 	)
 		return false
 	if (id.includes('katex')) return false

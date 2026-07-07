@@ -1,5 +1,6 @@
 import { generateShortId } from '@1ry/short-id'
 import clsx from 'clsx'
+import { twMerge } from 'tailwind-merge'
 import { tv, type VariantProps } from 'tailwind-variants'
 import React, { type HTMLAttributes, type ReactNode, useMemo } from 'react'
 
@@ -233,25 +234,35 @@ export function Box({
 	borderWidth,
 	noBorder,
 	borderColor,
+	noAnimation,
+	padding,
+	paddingX,
+	paddingY,
 	...props
 }: BoxProps) {
 	const id = useMemo(() => customId ?? generateShortId(7), [customId])
 	const Component = variant === 'navbar' && !as ? 'nav' : as || 'div'
 	const gapStyle = gap ? { gap: `${gap * 0.25}rem` } : undefined
-	const resolvedClassName = clsx(
-		className,
-		boxStyles({
-			variant,
-			orientation,
-			align,
-			justify,
-			isolate,
-			background,
-			noBorder,
-			borderColor,
-			grow,
-		}),
-		borderWidth && `border-${borderWidth}`,
+	const resolvedClassName = twMerge(
+		clsx(
+			className,
+			boxStyles({
+				variant,
+				orientation,
+				align,
+				justify,
+				isolate,
+				background,
+				noBorder,
+				borderColor,
+				grow,
+				noAnimation,
+				padding,
+				paddingX,
+				paddingY,
+			}),
+			borderWidth && `border-${borderWidth}`,
+		),
 	)
 	return (
 		<Component
