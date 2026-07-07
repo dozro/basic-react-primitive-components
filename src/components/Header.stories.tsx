@@ -2,22 +2,23 @@ import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 import { Card } from './Card'
 import { Text } from './Text'
+import Header from './Header'
 
-const meta: Meta<typeof Card> = {
-	title: 'Components/Card',
+const meta: Meta<typeof Header> = {
+	title: 'Components/Header',
 	component: Card,
 	tags: ['autodocs'],
 	args: {
 		noBorder: false,
 		children: (
-			<Card style={{ padding: '1rem' }}>
+			<Header style={{ padding: '1rem' }}>
 				<Text as="h3" style={{ margin: 0, marginBottom: '0.5rem' }}>
 					Card Titel
 				</Text>
 				<Text as="p" style={{ margin: 0 }}>
-					Das ist der Inhalt deiner wunderschönen Header-Komponente.
+					Das ist der Inhalt deiner wunderschönen Card-Komponente.
 				</Text>
-			</Card>
+			</Header>
 		),
 		background: 'transparent',
 	},
@@ -44,6 +45,12 @@ const meta: Meta<typeof Card> = {
 }
 
 export default meta
-type Story = StoryObj<typeof Card>
+type Story = StoryObj<typeof Header>
 
 export const Default: Story = {}
+
+export const NoBorder: Story = {
+	args: {
+		noBorder: true,
+	},
+}
