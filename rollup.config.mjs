@@ -92,14 +92,7 @@ export default defineConfig([
 			}),
 			resolve({
 				extensions: ['.ts', '.tsx', '.d.ts', '.scss'],
-				resolveOnly: [
-					'@phosphor-icons/react',
-					/^@phosphor-icons\/react\/.*?/,
-					'clsx',
-					/^clsx\/.*?/,
-					'tailwind-variants',
-					/^tailwind-variants\/.*?/,
-				],
+				resolveOnly: ['@phosphor-icons/react', /^@phosphor-icons\/react\/.*?/],
 			}),
 			commonjs(),
 			typescript({
