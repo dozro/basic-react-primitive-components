@@ -1,11 +1,11 @@
 import React, { type ReactNode } from 'react'
-import Box, { type BoxProps } from '$components/Box'
+import { Box, type BoxProps } from '$components/Box'
 
 type HeaderProps = BoxProps & {
 	children?: ReactNode
 }
 
-const Header = ({ children, ...props }: HeaderProps) => {
+export const Header = ({ children, ...props }: HeaderProps) => {
 	return (
 		<Box as="header" className="ryHeader w-full" {...props}>
 			<Box
@@ -22,6 +22,3 @@ const Header = ({ children, ...props }: HeaderProps) => {
 		</Box>
 	)
 }
-
-export { Header, HeaderProps }
-export default Header

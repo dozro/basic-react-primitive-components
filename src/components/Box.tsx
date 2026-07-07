@@ -2,7 +2,7 @@ import { generateShortId } from '@1ry/short-id'
 import { tv, type VariantProps } from 'tailwind-variants'
 import React, { type HTMLAttributes, type ReactNode, useMemo } from 'react'
 
-const boxStylesConfig = {
+export const boxStylesConfig = {
 	base: ['transition-all duration-200'],
 	variants: {
 		/**
@@ -172,13 +172,13 @@ const boxStylesConfig = {
  * Tailwind Variant configurations for the Box component, powered by `tailwind-variants`.
  * Defines the foundational transitions and multi-axis alignment mappings for layout generation.
  */
-const boxStyles = tv(boxStylesConfig)
+export const boxStyles = tv(boxStylesConfig)
 
 /**
  * Props for the Box component, combining standard HTML div attributes,
  * dynamic style variants, and custom layout properties.
  */
-type BoxProps = HTMLAttributes<HTMLDivElement> &
+export type BoxProps = HTMLAttributes<HTMLDivElement> &
 	VariantProps<typeof boxStyles> & {
 		/**
 		 * Renders the component as a specific semantic HTML element.
@@ -205,7 +205,7 @@ type BoxProps = HTMLAttributes<HTMLDivElement> &
  *
  * @returns A semantic React element styled according to the provided configuration.
  */
-function Box({
+export function Box({
 	variant = 'default',
 	as,
 	className,
@@ -224,26 +224,23 @@ function Box({
 	const Component = variant === 'navbar' && !as ? 'nav' : as || 'div'
 	const gapStyle = gap ? { gap: `${gap * 0.25}rem` } : undefined
 	return (
-        <Component
-            id={id}
-            style={{ ...gapStyle, ...props.style }}
-            data-has-gap={gap > 0 ? 'true' : undefined}
-            className={boxStyles({
-                variant,
-                orientation,
-                align,
-                justify,
-                isolate,
-                background,
-                grow,
-                className,
-            })}
-            {...props}
-        >
-            {children}
-        </Component>
-    )
+		<Component
+			id={id}
+			style={{ ...gapStyle, ...props.style }}
+			data-has-gap={gap > 0 ? 'true' : undefined}
+			className={boxStyles({
+				variant,
+				orientation,
+				align,
+				justify,
+				isolate,
+				background,
+				grow,
+				className,
+			})}
+			{...props}
+		>
+			{children}
+		</Component>
+	)
 }
-
-export { Box, BoxProps, boxStyles, boxStylesConfig }
-export default Box

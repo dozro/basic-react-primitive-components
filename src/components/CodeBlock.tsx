@@ -1,4 +1,4 @@
-import Box, { type BoxProps } from '$components/Box'
+import { Box, type BoxProps } from '$components/Box'
 import React, { useMemo } from 'react'
 import 'prismjs/themes/prism-twilight.css'
 import Prism from 'prismjs'

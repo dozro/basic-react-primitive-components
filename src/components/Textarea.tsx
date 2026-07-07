@@ -54,7 +54,7 @@ export type TextAreaProps = ComponentPropsWithoutRef<'textarea'> &
 		}
 	}
 
-const TextArea = ({
+export const TextArea = ({
 	label,
 	variant,
 	isInvalid,
@@ -86,6 +86,3 @@ const TextArea = ({
 		</Box>
 	)
 }
-
-export { TextArea }
-export default TextArea
