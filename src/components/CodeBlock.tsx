@@ -18,7 +18,7 @@ const CodeBlock = ({ code, language, ...props }: CodeBlockProps) => {
 	}, [language, code])
 	return (
 		<Box isolate {...props}>
-			<Box dangerouslySetInnerHTML={{ __html: highlightedCode }} />
+			<pre dangerouslySetInnerHTML={{ __html: highlightedCode }} />
 		</Box>
 	)
 }

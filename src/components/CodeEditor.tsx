@@ -15,6 +15,8 @@ export type CodeEditorProps = Pick<
 > & {
 	language?: string
 	placeholder?: string
+	value?: string
+	onChange?: (value: string) => void
 }
 
 const CodeEditor = ({
@@ -26,9 +28,11 @@ const CodeEditor = ({
 	label,
 	disabled,
 	placeholder,
+	value,
+	onChange,
 	...props
 }: CodeEditorProps) => {
-	const [code, setCode] = useState(placeholder ?? '')
+	const [code, setCode] = useState(value ?? placeholder ?? '')
 
 	const { root, label: labelSlot, textarea } = textAreaStyles({ variant, isInvalid })
 
@@ -48,7 +52,10 @@ const CodeEditor = ({
 			)}
 			<Editor
 				value={code}
-				onValueChange={(code: string) => setCode(code)}
+				onValueChange={(code: string) => {
+					setCode(code)
+					onChange?.(code)
+				}}
 				highlight={(code: string) => highlightCode(code)}
 				disabled={disabled}
 				className={textarea({ class: classNames?.textarea })}
