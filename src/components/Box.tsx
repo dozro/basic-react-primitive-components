@@ -1,10 +1,10 @@
 import { generateShortId } from '@1ry/short-id'
 import { tv, type VariantProps } from 'tailwind-variants'
 import { clsx } from 'clsx'
-import React, { Children, HTMLAttributes, ReactNode, useMemo } from 'react'
+import React, { type HTMLAttributes, type ReactNode, useMemo } from 'react'
 import styles from '../styles/Box.module.scss'
 
-export const boxStylesConfig = {
+const boxStylesConfig = {
 	base: ['transition-all duration-200'],
 	variants: {
 		/**
@@ -174,13 +174,13 @@ export const boxStylesConfig = {
  * Tailwind Variant configurations for the Box component, powered by `tailwind-variants`.
  * Defines the foundational transitions and multi-axis alignment mappings for layout generation.
  */
-export const boxStyles = tv(boxStylesConfig)
+const boxStyles = tv(boxStylesConfig)
 
 /**
  * Props for the Box component, combining standard HTML div attributes,
  * dynamic style variants, and custom layout properties.
  */
-export type BoxProps = HTMLAttributes<HTMLDivElement> &
+type BoxProps = HTMLAttributes<HTMLDivElement> &
 	VariantProps<typeof boxStyles> & {
 		/**
 		 * Renders the component as a specific semantic HTML element.
@@ -207,7 +207,7 @@ export type BoxProps = HTMLAttributes<HTMLDivElement> &
  *
  * @returns A semantic React element styled according to the provided configuration.
  */
-export function Box({
+function Box({
 	variant = 'default',
 	as,
 	className,
@@ -223,7 +223,6 @@ export function Box({
 }: BoxProps) {
 	const id = useMemo(() => customId ?? generateShortId(7), [customId])
 	const Component = variant === 'navbar' && !as ? 'nav' : as || 'div'
-	const childrenCount = useMemo(() => Children.count(children) ?? [], [children])
 	const gapStyle = gap ? { gap: `${gap * 0.25}rem` } : undefined
 	return (
 		<Component
@@ -241,6 +240,7 @@ export function Box({
 					className,
 				}),
 				!variant || !background ? styles.boxBase : undefined,
+				className,
 			)}
 			{...props}
 		>
@@ -248,3 +248,6 @@ export function Box({
 		</Component>
 	)
 }
+
+export { Box, BoxProps, boxStyles, boxStylesConfig }
+export default Box

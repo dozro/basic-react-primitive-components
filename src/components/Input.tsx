@@ -12,13 +12,12 @@ const InputStyles = tv({
 /**
  * Props for the Input component.
  */
-export type InputProps = HTMLProps<HTMLInputElement> &
+type InputProps = HTMLProps<HTMLInputElement> &
 	VariantProps<typeof InputStyles> & {
 		label?: string
 		glowing?: boolean
 	}
-
-export function Input({
+function Input({
 	label,
 	name: customName,
 	placeholder,
@@ -54,3 +53,6 @@ export function Input({
 		</Box>
 	)
 }
+
+export { Input, InputProps }
+export default InputProps

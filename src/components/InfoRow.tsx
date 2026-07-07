@@ -4,7 +4,7 @@ import { Box, BoxProps } from '$components/Box'
 import { clsx } from 'clsx'
 import { textStylesConfig } from '$components/Text'
 
-export const infoRowStylesConfig = {
+const infoRowStylesConfig = {
 	base: 'InfoRowComp items-center gap-2 sticky text-neutral-600',
 	variants: {
 		size: textStylesConfig.variants.size,
@@ -25,14 +25,7 @@ type InfoRowProps = BoxProps & {
 	children: ReactNode
 } & VariantProps<typeof infoRowStyles>
 
-export const InfoRow = ({
-	icon,
-	children,
-	size,
-	className,
-	border,
-	...props
-}: Readonly<InfoRowProps>) => {
+const InfoRow = ({ icon, children, size, className, border, ...props }: Readonly<InfoRowProps>) => {
 	return (
 		<Box
 			className={clsx(infoRowStyles({ size, className, border }), 'isolate')}
@@ -48,3 +41,6 @@ export const InfoRow = ({
 		</Box>
 	)
 }
+
+export { InfoRow, infoRowStylesConfig }
+export default InfoRow
