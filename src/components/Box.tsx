@@ -1,8 +1,6 @@
 import { generateShortId } from '@1ry/short-id'
 import { tv, type VariantProps } from 'tailwind-variants'
-import { clsx } from 'clsx'
 import React, { type HTMLAttributes, type ReactNode, useMemo } from 'react'
-import styles from '../styles/Box.module.scss'
 
 const boxStylesConfig = {
 	base: ['transition-all duration-200'],
@@ -138,7 +136,7 @@ const boxStylesConfig = {
 			/**
 			 * No specific main-axis distribution will be applied.
 			 */
-			none: 'justify-none',
+			none: '',
 			/**
 			 * Aligns children to the start of the main-axis.
 			 * @see https://tailwindcss.com/docs/justify-content#start
@@ -166,7 +164,7 @@ const boxStylesConfig = {
 		orientation: 'none',
 		align: 'none',
 		justify: 'none',
-		grow: 'yes',
+		grow: 'no',
 	},
 } as const
 
@@ -219,34 +217,32 @@ function Box({
 	isolate = false,
 	id: customId,
 	gap = 0,
+	grow = 'no',
 	...props
 }: BoxProps) {
 	const id = useMemo(() => customId ?? generateShortId(7), [customId])
 	const Component = variant === 'navbar' && !as ? 'nav' : as || 'div'
 	const gapStyle = gap ? { gap: `${gap * 0.25}rem` } : undefined
 	return (
-		<Component
-			id={id}
-			style={{ ...gapStyle, ...props.style }}
-			data-has-gap={gap > 0 ? 'true' : undefined}
-			className={clsx(
-				boxStyles({
-					variant,
-					orientation,
-					align,
-					justify,
-					isolate,
-					background,
-					className,
-				}),
-				!variant || !background ? styles.boxBase : undefined,
-				className,
-			)}
-			{...props}
-		>
-			{children}
-		</Component>
-	)
+        <Component
+            id={id}
+            style={{ ...gapStyle, ...props.style }}
+            data-has-gap={gap > 0 ? 'true' : undefined}
+            className={boxStyles({
+                variant,
+                orientation,
+                align,
+                justify,
+                isolate,
+                background,
+                grow,
+                className,
+            })}
+            {...props}
+        >
+            {children}
+        </Component>
+    )
 }
 
 export { Box, BoxProps, boxStyles, boxStylesConfig }
