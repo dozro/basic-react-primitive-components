@@ -120,3 +120,6 @@ dist
 lib/
 *storybook.log
 storybook-static
+
+src/components/__screenshots__
+.vitest-attachments
