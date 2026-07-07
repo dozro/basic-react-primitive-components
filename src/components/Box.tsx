@@ -4,7 +4,6 @@ import { tv, type VariantProps } from 'tailwind-variants'
 import React, { type HTMLAttributes, type ReactNode, useMemo } from 'react'
 
 export const boxStylesConfig = {
-	base: ['transition-all duration-200'],
 	variants: {
 		/**
 		 * The macro structural layout layout style.
@@ -13,6 +12,10 @@ export const boxStylesConfig = {
 			default: '',
 			navbar: 'navbar',
 			dock: 'dock',
+		},
+		noAnimation: {
+			true: 'transition-none hover:transform-none hover:shadow-none',
+			false: 'transition-all duration-200',
 		},
 		/**
 		 * Flexbox direction/orientation mapping.
@@ -32,12 +35,13 @@ export const boxStylesConfig = {
 		 * @default "transparent"
 		 */
 		background: {
-			teal: 'bg-teal-500',
-			yellow: 'bg-yellow-400',
-			gray: 'bg-gray-500',
-			white: 'bg-white',
+			none: '',
+			teal: 'bg-teal-500 dark:bg-teal-400',
+			yellow: 'bg-yellow-400 dark:bg-yellow-300',
+			gray: 'bg-gray-500 dark:bg-gray-400',
+			white: 'bg-white dark:bg-neutral-900',
 			transparent: 'bg-transparent',
-			magenta: 'bg-fuchsia-500',
+			magenta: 'bg-fuchsia-500 dark:bg-fuchsia-400',
 			cyan: 'bg-cyan-500 dark:bg-cyan-300',
 			amber: 'bg-amber-500 dark:bg-amber-400',
 			lime: 'bg-lime-500 dark:bg-lime-400',
@@ -53,6 +57,7 @@ export const boxStylesConfig = {
 		 * @default yes
 		 */
 		grow: {
+			none: '',
 			yes: 'grow',
 			no: 'grow-0',
 		},
@@ -92,16 +97,17 @@ export const boxStylesConfig = {
 		borderColor: {
 			black: 'border-black dark:border-neutral-100',
 			white: 'border-white dark:border-neutral-900',
-			gray: 'border-gray-500',
-			teal: 'border-teal-500',
-			yellow: 'border-yellow-400',
-			magenta: 'border-fuchsia-500',
+			gray: 'border-gray-500 dark:border-gray-400',
+			teal: 'border-teal-500 dark:border-teal-400',
+			yellow: 'border-yellow-400 dark:border-yellow-300',
+			magenta: 'border-fuchsia-500 dark:border-fuchsia-400',
 			cyan: 'border-cyan-500 dark:border-cyan-300',
 			amber: 'border-amber-500 dark:border-amber-400',
+			none: '',
 		},
 		noBorder: {
-			false: 'border-0',
-			true: 'box-border rounded-md border',
+			true: 'border-0',
+			false: 'box-border rounded-md border-3 border-solid',
 		},
 		/**
 		 * Cross-axis flex alignments and text alignments.
@@ -153,15 +159,19 @@ export const boxStylesConfig = {
 		 * @default false
 		 */
 		isolate: {
+			false: '',
 			true: 'isolate',
 		},
 	},
 	defaultVariants: {
+		noAnimation: false,
 		paddingY: '0',
 		paddingX: '0',
 		padding: '0',
-		background: 'transparent',
+		background: 'none',
 		variant: 'default',
+		noBorder: true,
+		borderColor: 'none',
 		orientation: 'none',
 		align: 'none',
 		justify: 'none',
@@ -195,6 +205,7 @@ export type BoxProps = HTMLAttributes<HTMLDivElement> &
 		 * @default 0
 		 */
 		gap?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 12 | 16
+		borderWidth?: '0' | '1' | '2' | '3' | '4' | '5' | '10' | '20'
 	}
 
 /**
@@ -210,15 +221,18 @@ export function Box({
 	variant = 'default',
 	as,
 	className,
-	orientation = 'none',
-	align = 'none',
-	justify = 'none',
+	orientation,
+	align,
+	justify,
 	background = 'transparent',
 	children,
 	isolate = false,
 	id: customId,
 	gap = 0,
 	grow = 'no',
+	borderWidth,
+	noBorder,
+	borderColor,
 	...props
 }: BoxProps) {
 	const id = useMemo(() => customId ?? generateShortId(7), [customId])
@@ -233,8 +247,11 @@ export function Box({
 			justify,
 			isolate,
 			background,
+			noBorder,
+			borderColor,
 			grow,
 		}),
+		borderWidth && `border-${borderWidth}`,
 	)
 	return (
 		<Component

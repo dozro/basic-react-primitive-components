@@ -27,6 +27,32 @@ const meta: Meta<typeof Box> = {
 			control: 'select',
 			options: ['div', 'nav', 'footer', 'main', 'article', 'aside', 'section', 'header'],
 		},
+		noBorder: {
+			control: 'boolean',
+			description: 'If true, the Box will not have a border. If false, it will have a border.',
+		},
+		noAnimation: {
+			control: 'boolean',
+		},
+		borderColor: {
+			control: 'select',
+			description: 'The color of the border. Only applies if noBorder is false.',
+			options: [
+				'teal',
+				'white',
+				'yellow',
+				'gray',
+				'transparent',
+				'magenta',
+				'cyan',
+				'lime',
+				'indigo',
+				'rose',
+				'slate',
+				'violet',
+				'orange',
+			],
+		},
 		gap: {
 			control: 'number',
 		},

@@ -10,14 +10,14 @@ const meta: Meta<typeof Card> = {
 	args: {
 		noBorder: false,
 		children: (
-			<Card style={{ padding: '1rem' }}>
+			<>
 				<Text as="h3" style={{ margin: 0, marginBottom: '0.5rem' }}>
 					Card Titel
 				</Text>
 				<Text as="p" style={{ margin: 0 }}>
 					Das ist der Inhalt deiner wunderschönen Header-Komponente.
 				</Text>
-			</Card>
+			</>
 		),
 		background: 'transparent',
 	},
@@ -26,12 +26,12 @@ const meta: Meta<typeof Card> = {
 			control: 'select',
 			options: [
 				'teal',
+				'white',
 				'yellow',
 				'gray',
 				'transparent',
 				'magenta',
 				'cyan',
-				'amber',
 				'lime',
 				'indigo',
 				'rose',
@@ -39,6 +39,9 @@ const meta: Meta<typeof Card> = {
 				'violet',
 				'orange',
 			],
+		},
+		noAnimation: {
+			control: 'boolean',
 		},
 	},
 }
