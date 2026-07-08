@@ -32,6 +32,8 @@ const inputFiles = globSync(['src/**/*.ts', 'src/**/*.tsx'], {
 		'src/**/*.stories.ts',
 		'src/**/*.stories.tsx',
 		'src/**/*.spec.ts',
+		'src/**/*.spec.tsx',
+		'src/**/__screenshots__/**',
 	],
 })
 
@@ -105,10 +107,13 @@ export default defineConfig([
 				exclude: [
 					'**/*.test.tsx',
 					'**/*.test.ts',
+					'**/*.spec.ts',
+					'**/*.spec.tsx',
 					'**/*.stories.tsx',
 					'**/*.stories.ts',
 					'./node_modules/**',
 					'./lib/**',
+					'**/__screenshots__/**',
 				],
 			}),
 			{
