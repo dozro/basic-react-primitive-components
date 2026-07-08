@@ -220,7 +220,8 @@ export type BoxProps = HTMLAttributes<HTMLDivElement> &
  */
 export function Box({
 	variant = 'default',
-	as,	orientation,
+	as,
+	orientation,
 	align,
 	justify,
 	background = 'transparent',

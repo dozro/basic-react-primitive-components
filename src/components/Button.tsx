@@ -114,12 +114,12 @@ export function Button({
 		return (
 			<button
 				className={clsx(
-				cname,
-				glowing ? styles.glow : undefined,
-				transparent ? styles.transparent : undefined,
-				noBorder ? styles.noBorder : undefined,
-				styles.buttonBase,
-				styles.submitButton,
+					cname,
+					glowing ? styles.glow : undefined,
+					transparent ? styles.transparent : undefined,
+					noBorder ? styles.noBorder : undefined,
+					styles.buttonBase,
+					styles.submitButton,
 				)}
 				type="submit"
 				title={title}
