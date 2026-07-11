@@ -1,22 +1,46 @@
-import clsx from 'clsx'
-import styles from '../styles/Button.module.scss'
 import { generateShortId } from '@1ry/short-id'
 import type { ButtonHTMLAttributes } from 'react'
 import React, { useMemo } from 'react'
 import { tv, type VariantProps } from 'tailwind-variants'
+import { twMerge } from 'tailwind-merge'
 
 const buttonStyles = tv({
-	base: styles.buttonBase,
+	base: [
+		'inline-flex',
+		'items-center',
+		'justify-center',
+		'cursor-pointer',
+		'text-[var(--rylib-color-primary-light)]',
+		'border-groove',
+		'border-[var(--rylib-color-primary-light)]',
+		'transition-[transform,box-shadow,background-color] duration-150 ease-out hover:-translate-y-0.5',
+		'active:translate-y-0 active:shadow-[0_3px_8px_rgba(0,0,0,0.1)]',
+		'dark:text-[var(--rylib-color-primary-dark)] dark:border-[var(--rylib-color-primary-dark)] dark:active:shadow-[0_3px_8px_rgba(0,0,0,0.5)]',
+	],
 	variants: {
 		glowing: {
-			true: styles.glow,
+			true: [
+				'hover:bg-[linear-gradient(135deg,var(--rylib-color-accent-light),var(--rylib-color-secondaryaccent-light))]',
+				'hover:shadow-[0_0_20px_var(--rylib-color-accent-light)]',
+				'dark:hover:bg-[linear-gradient(135deg,var(--rylib-color-accent-dark),var(--rylib-color-secondaryaccent-dark))]',
+				'dark:hover:shadow-[0_0_20px_var(--rylib-color-accent-dark)]',
+			],
+			false: '',
 		},
 		transparent: {
-			true: styles.transparent,
+			true: 'bg-transparent',
+			false: '',
+			no: '',
 		},
 		noBorder: {
-			true: styles.noBorder,
+			true: 'border-none',
+			false: '',
 		},
+	},
+	defaultVariants: {
+		glowing: false,
+		transparent: true,
+		noBorder: false,
 	},
 } as const)
 
@@ -104,33 +128,14 @@ export function Button({
 	})
 	if (asSubmit) {
 		return (
-			<button
-				className={clsx(
-					cname,
-					glowing ? styles.glow : undefined,
-					transparent ? styles.transparent : undefined,
-					noBorder ? styles.noBorder : undefined,
-					styles.buttonBase,
-					styles.submitButton,
-				)}
-				type="submit"
-				title={title}
-				id={id}
-				{...props}
-			>
+			<button className={twMerge(cname)} type="submit" title={title} id={id} {...props}>
 				{children}
 			</button>
 		)
 	}
 	return (
 		<button
-			className={clsx(
-				cname,
-				glowing ? styles.glow : undefined,
-				transparent ? styles.transparent : undefined,
-				noBorder ? styles.noBorder : undefined,
-				styles.buttonBase,
-			)}
+			className={twMerge(cname)}
 			title={title}
 			id={id}
 			type={type}

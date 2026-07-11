@@ -32,6 +32,12 @@ const textStyles = tv({
 			'10': 'p-10',
 			'20': 'p-20',
 		},
+		fontFamily: {
+			unset: '',
+			sans: 'font-sans',
+			serif: 'font-serif',
+			mono: 'font-mono',
+		},
 		/**
 		 * the alignment of the text within its container, controlling flexbox alignment and text alignment
 		 * @default "none"
@@ -95,6 +101,21 @@ const textStyles = tv({
 			semibold: 'font-semibold',
 			bold: 'font-bold',
 		},
+		textWrap: {
+			unset: '',
+			true: 'text-wrap',
+			no: 'text-nowrap',
+			balance: 'text-balance',
+			pretty: 'text-pretty',
+		},
+		hyphens: {
+			unset: '',
+			false: '',
+			none: 'hyphens-none',
+			manual: 'hyphens-none',
+			auto: 'hyphens-auto',
+			true: 'hyphens-auto',
+		},
 		/**
 		 *
 		 * @default "base"
@@ -111,6 +132,9 @@ const textStyles = tv({
 	defaultVariants: {
 		size: 'base',
 		font: 'normal',
+		fontFamily: 'unset',
+		hyphens: 'unset',
+		textWrap: true,
 		justify: 'none',
 		align: 'none',
 		padding: 'none',
@@ -139,10 +163,13 @@ export function Text<T extends AllowedElements = 'span'>({
 	children,
 	paddingBefore = 'none',
 	padding,
+	hyphens,
 	align,
 	justify,
-	font = 'medium',
+	fontFamily,
+	font,
 	size,
+	textWrap,
 	...props
 }: TextProps<T>) {
 	const Component = (as || 'span') as ElementType
@@ -152,9 +179,12 @@ export function Text<T extends AllowedElements = 'span'>({
 			className={twMerge(
 				textStyles({
 					variant,
+					hyphens,
 					paddingBefore,
 					font,
+					fontFamily,
 					size,
+					textWrap,
 					className,
 					padding,
 					align,
