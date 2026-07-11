@@ -160,6 +160,7 @@ export function Text<T extends AllowedElements = 'span'>({
 					align,
 					justify,
 				}),
+				className,
 				styles.textBase,
 			)}
 			{...props}

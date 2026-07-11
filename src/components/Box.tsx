@@ -22,6 +22,10 @@ export const boxStyles = tv({
 			true: 'transition-none hover:transform-none hover:shadow-none',
 			false: 'transition-all duration-200',
 		},
+		hidden: {
+			true: 'hidden',
+			false: '',
+		},
 		/**
 		 * Flexbox direction/orientation mapping.
 		 * @example "horizontal"
@@ -178,6 +182,7 @@ export const boxStyles = tv({
 		},
 	},
 	defaultVariants: {
+		hidden: false,
 		noAnimation: false,
 		paddingY: 'none',
 		paddingX: 'none',
@@ -245,30 +250,30 @@ export function Box({
 	padding,
 	paddingX,
 	paddingY,
+	className,
 	...props
 }: BoxProps) {
 	const id = useMemo(() => customId ?? generateShortId(7), [customId])
 	const Component = variant === 'navbar' && !as ? 'nav' : as || 'div'
 	const gapStyle = gap ? { gap: `${gap * 0.25}rem` } : undefined
 	const resolvedClassName = twMerge(
-		clsx(
-			boxStyles({
-				variant,
-				orientation,
-				align,
-				justify,
-				isolate,
-				background,
-				noBorder,
-				borderColor,
-				grow,
-				noAnimation,
-				padding,
-				paddingX,
-				paddingY,
-			}),
-			borderWidth && `border-${borderWidth}`,
-		),
+		boxStyles({
+			variant,
+			orientation,
+			align,
+			justify,
+			isolate,
+			background,
+			noBorder,
+			borderColor,
+			grow,
+			noAnimation,
+			padding,
+			paddingX,
+			paddingY,
+		}),
+		className,
+		clsx(borderWidth && `border-${borderWidth}`),
 	)
 	return (
 		<Component
