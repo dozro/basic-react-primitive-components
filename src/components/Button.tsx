@@ -5,13 +5,7 @@ import type { ButtonHTMLAttributes } from 'react'
 import React, { useMemo } from 'react'
 import { tv, type VariantProps } from 'tailwind-variants'
 
-/**
- * Tailwind Variants configuration for the {@link Button} component.
- *
- * Defines the base styles and supported visual variants used to
- * generate the component's class names.
- */
-export const buttonStylesConfig = {
+const buttonStyles = tv({
 	base: styles.buttonBase,
 	variants: {
 		glowing: {
@@ -24,9 +18,7 @@ export const buttonStylesConfig = {
 			true: styles.noBorder,
 		},
 	},
-} as const
-
-const buttonStyles = tv(buttonStylesConfig)
+} as const)
 
 /**
  * Props for the {@link Button} component.

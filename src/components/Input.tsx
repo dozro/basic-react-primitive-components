@@ -1,11 +1,11 @@
-import { Box, boxStylesConfig } from '$components/Box'
+import { Box, BoxProps } from '$components/Box'
 import { Button } from '$components/Button'
-import { Text, textStylesConfig } from '$components/Text'
+import { Text } from '$components/Text'
 import { generateShortId } from '@1ry/short-id'
 import React, { HTMLProps, useMemo } from 'react'
 import { tv, type VariantProps } from 'tailwind-variants'
 
-export const InputStylesConfig = {
+const InputStyles = tv({
 	base: 'w-full bg-transparent outline-none text-sm text-zinc-900 placeholder:text-zinc-400',
 	variants: {
 		width: {
@@ -14,21 +14,17 @@ export const InputStylesConfig = {
 			medium: 'w-[400px]',
 			small: 'w-64',
 		},
-		textSize: textStylesConfig.variants.size,
-		background: boxStylesConfig.variants.background,
 	},
 	defaultVariants: {
 		width: 'medium',
-		textSize: textStylesConfig.defaultVariants.size,
 	},
-} as const
-
-const InputStyles = tv(InputStylesConfig)
+} as const)
 
 /**
  * Props for the Input component.
  */
 export type InputProps = HTMLProps<HTMLInputElement> &
+	Partial<Pick<BoxProps, 'textSize' | 'background'>> &
 	VariantProps<typeof InputStyles> & {
 		label?: string
 		glowing?: boolean
@@ -47,9 +43,9 @@ export function Input({
 }: InputProps) {
 	const id = useMemo(() => customId ?? generateShortId(7), [customId])
 	const name = useMemo(() => customName ?? id, [customName, id])
-	const cname = InputStyles({ width, background, textSize })
+	const cname = InputStyles({ width })
 	return (
-		<Box orientation="none" justify="evenly">
+		<Box orientation="none" justify="evenly" background={background} textSize={textSize}>
 			{label && (
 				<Text htmlFor={id} as="label" className="text-sm font-medium text-zinc-700 mt-1.5">
 					{label}

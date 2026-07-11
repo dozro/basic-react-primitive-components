@@ -1,5 +1,5 @@
 import { Button, ButtonProps } from '$components/Button'
-import { Text } from '$components/Text'
+import { Text, TextProps } from '$components/Text'
 import { generateShortId } from '@1ry/short-id'
 import React, { ReactNode, useMemo } from 'react'
 import { tv, type VariantProps } from 'tailwind-variants'
@@ -19,7 +19,8 @@ const inputButtonStyles = tv({
 })
 
 export type IconButtonProps = ButtonProps &
-	VariantProps<typeof inputButtonStyles> & {
+	VariantProps<typeof inputButtonStyles> &
+	Partial<Pick<TextProps<'label'>, 'size'>> & {
 		className?: string
 		children?: ReactNode
 		label?: string
@@ -30,6 +31,7 @@ export function IconButton({
 	children,
 	label,
 	id: customId,
+	size = 'base',
 	...props
 }: IconButtonProps) {
 	const id = useMemo(() => customId ?? generateShortId(7), [customId])
@@ -45,7 +47,7 @@ export function IconButton({
 		>
 			{children}
 			{label && (
-				<Text htmlFor={id} paddingBefore="10" as="label" variant="wavy">
+				<Text size={size} htmlFor={id} paddingBefore="10" as="label" variant="wavy">
 					{' '}
 					{label}
 				</Text>

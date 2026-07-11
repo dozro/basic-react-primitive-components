@@ -1,4 +1,4 @@
-import { Box, type BoxProps, boxStylesConfig } from '$components/Box'
+import { Box, type BoxProps } from '$components/Box'
 import { IconButton } from '$components/IconButton'
 import { generateShortId } from '@1ry/short-id'
 import React, { ReactNode, useMemo } from 'react'
@@ -6,23 +6,17 @@ import { tv, type VariantProps } from 'tailwind-variants'
 import MODALSTYLES from '../styles/Modal.module.scss'
 import clsx from 'clsx'
 import { FloppyDiskIcon, XIcon } from '@phosphor-icons/react'
-import { textStylesConfig } from './Text'
 
-export const modalStylesConfig = {
+const modalStyles = tv({
 	variants: {
 		variant: {
 			default: '',
 		},
-		background: boxStylesConfig.variants.background,
-		textSize: textStylesConfig.variants.size,
 	},
 	defaultVariants: {
 		variant: 'default',
-		background: boxStylesConfig.defaultVariants.background,
 	},
-} as const
-
-const modalStyles = tv(modalStylesConfig)
+} as const)
 
 export type ModalProps = BoxProps &
 	VariantProps<typeof modalStyles> & {
@@ -49,9 +43,7 @@ export const Modal = ({
 	showSubmitButton,
 	submitText,
 	submitIcon = <FloppyDiskIcon />,
-	textSize,
 	variant,
-	background,
 	...props
 }: ModalProps) => {
 	const id = useMemo(() => customId ?? generateShortId(7), [customId])
@@ -64,11 +56,7 @@ export const Modal = ({
 				orientation="none"
 				id={`${id}_modal_box`}
 				{...props}
-				className={clsx(
-					MODALSTYLES.modalBase,
-					modalStyles({ variant, background, textSize }),
-					props.className,
-				)}
+				className={clsx(MODALSTYLES.modalBase, modalStyles({ variant }), props.className)}
 			>
 				{modalTitle && <Box>{modalTitle}</Box>}
 				{modalSubTitle && <Box>{modalSubTitle}</Box>}

@@ -1,12 +1,11 @@
 import styles from '../styles/Text.module.scss'
 import React, { ComponentPropsWithoutRef, ElementType } from 'react'
-import { boxStylesConfig } from '$components/Box'
 import { twMerge } from 'tailwind-merge'
 import { tv, type VariantProps } from 'tailwind-variants'
 
 type AllowedElements = 'p' | 'span' | 'label' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 
-export const textStylesConfig = {
+const textStyles = tv({
 	variants: {
 		/**
 		 * the visual style variant of the text, controlling font size, color, and decoration
@@ -22,17 +21,61 @@ export const textStylesConfig = {
 		 * the padding around the text, useful for spacing in layouts
 		 * @default "none"
 		 */
-		padding: boxStylesConfig.variants.padding,
+		padding: {
+			none: '',
+			'0': 'p-0',
+			'1': 'p-1',
+			'2': 'p-2',
+			'3': 'p-3',
+			'4': 'p-4',
+			'5': 'p-5',
+			'10': 'p-10',
+			'20': 'p-20',
+		},
 		/**
 		 * the alignment of the text within its container, controlling flexbox alignment and text alignment
 		 * @default "none"
 		 */
-		align: boxStylesConfig.variants.align,
+		align: {
+			none: '',
+			/**
+			 * Aligns children to the start of the cross-axis and left-aligns text.
+			 * @see https://tailwindcss.com/docs/align-items#start
+			 * @see https://tailwindcss.com/docs/text-align#left
+			 */
+			left: 'items-start text-left',
+			/**
+			 * Aligns children to the center of the cross-axis and center-aligns text.
+			 * @see https://tailwindcss.com/docs/align-items#center
+			 * @see https://tailwindcss.com/docs/text-align#center
+			 */
+			center: 'items-center text-center',
+			/**
+			 * Aligns children to the end of the cross-axis and right-aligns text.
+			 * @see https://tailwindcss.com/docs/align-items#end
+			 * @see https://tailwindcss.com/docs/text-align#right
+			 */
+			right:
+				'items-end text-right data-[has-gap=true]:place-self-end-safe data-[has-gap=true]:place-content-end-safe data-[has-gap=true]:place-items-end-safe',
+		},
 		/**
-		 * the justification of the text within its container, controlling flexbox justification
-		 * @default "none"
+		 * Main-axis flex distribution utilities.
 		 */
-		justify: boxStylesConfig.variants.justify,
+		justify: {
+			/**
+			 * No specific main-axis distribution will be applied.
+			 */
+			none: '',
+			/**
+			 * Aligns children to the start of the main-axis.
+			 * @see https://tailwindcss.com/docs/justify-content#start
+			 */
+			start: 'justify-start',
+			end: 'justify-end',
+			center: 'justify-center',
+			evenly: 'justify-evenly',
+			spaceBetween: 'justify-between',
+		},
 		/**
 		 * the padding before the text, useful for aligning with icons or other elements
 		 * @default "none"
@@ -74,9 +117,7 @@ export const textStylesConfig = {
 		paddingBefore: 'none',
 		variant: 'default',
 	},
-} as const
-
-const textStyles = tv(textStylesConfig)
+} as const)
 
 export type TextProps<T extends AllowedElements> = VariantProps<typeof textStyles> &
 	(

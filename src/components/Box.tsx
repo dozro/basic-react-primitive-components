@@ -4,7 +4,11 @@ import { twMerge } from 'tailwind-merge'
 import { tv, type VariantProps } from 'tailwind-variants'
 import React, { type HTMLAttributes, type ReactNode, useMemo } from 'react'
 
-export const boxStylesConfig = {
+/**
+ * Tailwind Variant configurations for the Box component, powered by `tailwind-variants`.
+ * Defines the foundational transitions and multi-axis alignment mappings for layout generation.
+ */
+export const boxStyles = tv({
 	variants: {
 		/**
 		 * The macro structural layout layout style.
@@ -163,6 +167,15 @@ export const boxStylesConfig = {
 			false: '',
 			true: 'isolate',
 		},
+		textSize: {
+			unset: '',
+			xs: 'text-xs',
+			small: 'text-sm',
+			base: 'text-base',
+			large: 'text-lg',
+			xl: 'text-xl',
+			'2xl': 'text-2xl',
+		},
 	},
 	defaultVariants: {
 		noAnimation: false,
@@ -177,14 +190,9 @@ export const boxStylesConfig = {
 		align: 'none',
 		justify: 'none',
 		grow: 'none',
+		textSize: 'unset',
 	},
-} as const
-
-/**
- * Tailwind Variant configurations for the Box component, powered by `tailwind-variants`.
- * Defines the foundational transitions and multi-axis alignment mappings for layout generation.
- */
-export const boxStyles = tv(boxStylesConfig)
+})
 
 /**
  * Props for the Box component, combining standard HTML div attributes,

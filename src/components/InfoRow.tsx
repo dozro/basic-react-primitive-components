@@ -2,23 +2,27 @@ import React, { type ReactNode, type ReactElement } from 'react'
 import { tv, VariantProps } from 'tailwind-variants'
 import { Box, BoxProps } from '$components/Box'
 import { clsx } from 'clsx'
-import { textStylesConfig } from '$components/Text'
 
-export const infoRowStylesConfig = {
+export const infoRowStyles = tv({
 	base: 'InfoRowComp items-center gap-2 sticky text-neutral-600',
 	variants: {
-		size: textStylesConfig.variants.size,
+		size: {
+			xs: 'text-xs',
+			small: 'text-sm',
+			base: 'text-base',
+			large: 'text-lg',
+			xl: 'text-xl',
+			'2xl': 'text-2xl',
+		},
 		border: {
 			true: 'border border-neutral-300 dark:border-neutral-700 rounded-md p-2',
 		},
 	},
 	defaultVariants: {
-		size: textStylesConfig.defaultVariants.size,
+		size: 'base',
 		border: false,
 	},
-} as const
-
-export const infoRowStyles = tv(infoRowStylesConfig)
+} as const)
 
 export type InfoRowProps = BoxProps & {
 	icon: ReactElement

@@ -1,10 +1,10 @@
 import React, { type ComponentPropsWithoutRef, useId, useState } from 'react'
-import { Box } from '$components/Box'
+import { Box, BoxProps } from '$components/Box'
 import { Text } from '$components/Text'
 
 import { tv, type VariantProps } from 'tailwind-variants'
 
-export const textAreaStylesConfig = {
+export const textAreaStyles = tv({
 	slots: {
 		root: 'flex flex-col gap-1.5 w-full',
 		label:
@@ -38,13 +38,12 @@ export const textAreaStylesConfig = {
 	defaultVariants: {
 		variant: 'default',
 	},
-} as const
-
-export const textAreaStyles = tv(textAreaStylesConfig)
+} as const)
 
 export type TextAreaVariants = VariantProps<typeof textAreaStyles>
 
 export type TextAreaProps = ComponentPropsWithoutRef<'textarea'> &
+	Partial<Pick<BoxProps, 'background' | 'textSize'>> &
 	TextAreaVariants & {
 		label?: string
 		classNames?: {
@@ -62,6 +61,8 @@ export const TextArea = ({
 	classNames,
 	disabled,
 	id: customId,
+	background,
+	textSize,
 	...props
 }: TextAreaProps) => {
 	const defaultId = useId()
@@ -69,7 +70,11 @@ export const TextArea = ({
 	const { root, label: labelSlot, textarea } = textAreaStyles({ variant, isInvalid })
 
 	return (
-		<Box className={root({ class: classNames?.root ?? className })}>
+		<Box
+			background={background}
+			textSize={textSize}
+			className={root({ class: classNames?.root ?? className })}
+		>
 			{label && (
 				<Text as="label" htmlFor={id} className={labelSlot({ class: classNames?.label })}>
 					{label}
