@@ -134,13 +134,7 @@ export function Button({
 		)
 	}
 	return (
-		<button
-			className={twMerge(cname)}
-			title={title}
-			id={id}
-			type={type}
-			{...props}
-		>
+		<button className={twMerge(cname)} title={title} id={id} type={type} {...props}>
 			{children}
 		</button>
 	)

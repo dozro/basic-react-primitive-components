@@ -81,6 +81,13 @@ export const boxStyles = tv({
 		 */
 		background: {
 			none: '',
+			primary: 'bg-[var(--rylib-color-primary-light) dark:bg-[var(--rylib-color-primary-dark)]',
+			secondary:
+				'bg-[var(--rylib-color-secondary-light)] dark:bg-[var(--rylib-color-secondary-dark)]',
+			surface: 'bg-[var(--rylib-color-surface-light)] dark:bg-[var(--rylib-color-surface-dark)]',
+			themeBackground:
+				'bg-[var(--rylib-color-background-light)] dark:bg-[var(--rylib-color-background-dark)]',
+			inherit: 'bg-inherit',
 			teal: 'bg-teal-500 dark:bg-teal-400',
 			yellow: 'bg-yellow-400 dark:bg-yellow-300',
 			gray: 'bg-gray-500 dark:bg-gray-400',
@@ -261,7 +268,7 @@ export const boxStyles = tv({
 		paddingX: 'none',
 		padding: 'none',
 		margin: 'unset',
-		background: 'none',
+		background: 'themeBackground',
 		variant: 'default',
 		noBorder: true,
 		borderColor: 'none',

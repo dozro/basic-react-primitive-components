@@ -1,10 +1,10 @@
-import katex from 'katex'
-import 'katex/dist/katex.min.css'
 import React, { useEffect, useRef } from 'react'
 import { Text, type TextProps } from '$components/Text'
 import { type BoxProps, Box } from '$components/Box'
 
-const renderBlock = (latex: string, container: HTMLElement, displayMode = true) => {
+const renderBlock = async (latex: string, container: HTMLElement, displayMode = true) => {
+	const katex = await import('katex')
+	await import('katex/dist/katex.min.css')
 	try {
 		katex.render(latex, container, {
 			throwOnError: false,
@@ -23,8 +23,17 @@ export const InlineMath = ({ latex, ...props }: InlineMathProps) => {
 	const containerRef = useRef<HTMLSpanElement>(null)
 
 	useEffect(() => {
-		if (containerRef.current) {
-			renderBlock(latex, containerRef.current, false)
+		let cancelled = false
+
+		const run = async () => {
+			if (!containerRef.current || cancelled) return
+			await renderBlock(latex, containerRef.current, false)
+		}
+
+		run()
+
+		return () => {
+			cancelled = true
 		}
 	}, [latex])
 
@@ -43,8 +52,17 @@ export const BlockMath = ({ latex, ...props }: BlockMathProps) => {
 	const containerRef = useRef<HTMLSpanElement>(null)
 
 	useEffect(() => {
-		if (containerRef.current) {
-			renderBlock(latex, containerRef.current, true)
+		let cancelled = false
+
+		const run = async () => {
+			if (!containerRef.current || cancelled) return
+			await renderBlock(latex, containerRef.current, true)
+		}
+
+		run()
+
+		return () => {
+			cancelled = true
 		}
 	}, [latex])
 

@@ -29,6 +29,10 @@ const meta: Meta<typeof Text> = {
 			control: 'select',
 			options: ['default', 'title', 'wavy', 'muted'],
 		},
+		fontFamily: {
+			control: 'select',
+			options: ['sans', 'serif', 'mono', 'cousine'],
+		},
 	},
 }
 

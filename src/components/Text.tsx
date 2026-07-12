@@ -2,7 +2,6 @@ import styles from '../styles/Text.module.scss'
 import React, { ComponentPropsWithoutRef, ElementType } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { tv, type VariantProps } from 'tailwind-variants'
-
 type AllowedElements = 'p' | 'span' | 'label' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 
 const textStyles = tv({
@@ -173,7 +172,6 @@ export function Text<T extends AllowedElements = 'span'>({
 	...props
 }: TextProps<T>) {
 	const Component = (as || 'span') as ElementType
-
 	return (
 		<Component
 			className={twMerge(
