@@ -12,7 +12,7 @@ const textStyles = tv({
 		 */
 		variant: {
 			default: 'text-sm text-neutral-600' as const,
-			title: 'text-2xl font-medium text-amber-900' as const,
+			title: 'text-4xl font-medium text-amber-900' as const,
 			wavy: 'text-sm text-neutral-600 decoration-wavy' as const,
 			muted: 'text-sm text-neutral-400' as const,
 		},
@@ -126,6 +126,13 @@ const textStyles = tv({
 			large: 'text-lg',
 			xl: 'text-xl',
 			'2xl': 'text-2xl',
+			'3xl': 'text-3xl',
+			'4xl': 'text-4xl',
+			'5xl': 'text-5xl',
+			'6xl': 'text-6xl',
+			'7xl': 'text-7xl',
+			'8xl': 'text-8xl',
+			'9xl': 'text-9xl',
 		},
 	},
 	defaultVariants: {

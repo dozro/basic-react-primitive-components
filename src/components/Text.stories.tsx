@@ -23,7 +23,21 @@ const meta: Meta<typeof Text> = {
 		},
 		size: {
 			control: 'select',
-			options: ['xs', 'small', 'base', 'large', 'xl', '2xl'],
+			options: [
+				'xs',
+				'small',
+				'base',
+				'large',
+				'xl',
+				'2xl',
+				'3xl',
+				'4xl',
+				'5xl',
+				'6xl',
+				'7xl',
+				'8xl',
+				'9xl',
+			],
 		},
 		variant: {
 			control: 'select',
