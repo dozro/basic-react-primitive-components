@@ -1,4 +1,13 @@
-import React, { createContext, useContext, ReactNode, FC, useRef, useEffect } from 'react'
+import React, {
+	createContext,
+	useContext,
+	ReactNode,
+	FC,
+	useRef,
+	useEffect,
+	useMemo,
+	useId,
+} from 'react'
 import '../styles/tailwind.css'
 import '../styles/rylib.module.scss'
 
@@ -248,61 +257,54 @@ export interface RyLibProviderProps {
  * @author Rye
  */
 export const RyLibProvider: FC<RyLibProviderProps> = ({ config, children }: RyLibProviderProps) => {
-	const containerRef = useRef<HTMLDivElement>(null)
+	const scopeId = useId().replace(/:/g, '')
+	const scopeClass = `rylib-scope-${scopeId}`
+
 	const toSnakeCase = (str: string) => str.replace(/([a-z0-9])([A-Z])/g, '$1_$2').toLowerCase()
 
-	useEffect(() => {
-		/**
-		 * The container element where the CSS custom properties will be injected.
-		 */
-		const container = containerRef.current
-		if (!container) return
+	const dynamicCss = useMemo(() => {
+		const styles: string[] = []
 
-		/**
-		 * the individual theme keys to be processed for CSS variable injection.
-		 * Each key corresponds to a color configuration in the `RyThemeConfig`.
-		 * The keys are used to generate CSS custom properties for both light and dark themes.
-		 * @see {@link defaultThemeDefaults}
-		 */
-		const themeKeys = Object.keys(defaultThemeDefaults) as Array<keyof RyThemeConfig>
+		if (config.theme) {
+			Object.entries(config.theme).forEach(([key, colorConfig]) => {
+				if (!colorConfig) return
+				const cssBaseName = toSnakeCase(key.replace('Color', ''))
 
-		themeKeys.forEach((key) => {
-			const colorConfig = config.theme[key]
-			const defaults = defaultThemeDefaults[key]
+				if (colorConfig.lightColor) {
+					styles.push(
+						`.${scopeClass} { --rylib-color-${cssBaseName}-light: ${colorConfig.lightColor}; }`,
+					)
+				}
+				if (colorConfig.darkColor) {
+					styles.push(
+						`.${scopeClass} { --rylib-color-${cssBaseName}-dark: ${colorConfig.darkColor}; }`,
+					)
+				}
+			})
+		}
 
-			const cssBaseName = toSnakeCase(key.replace('Color', ''))
-
-			const lightValue = colorConfig?.lightColor ?? defaults.light
-			const darkValue = colorConfig?.darkColor ?? defaults.dark
-
-			container.style.setProperty(`--rylib-color-${cssBaseName}-light`, lightValue)
-			container.style.setProperty(`--rylib-color-${cssBaseName}-dark`, darkValue)
-		})
-		/**
-		 * The individual sizing keys to be processed for CSS variable injection.
-		 * Each key corresponds to a size configuration in the `RySizingConfig`.
-		 * The keys are used to generate CSS custom properties for sizing units.
-		 * @see {@link defaultSizingDefaults}
-		 */
-		const sizingKeys = Object.keys(defaultSizingDefaults) as Array<keyof RySizingConfig>
-		sizingKeys.forEach((key) => {
-			const sizeConfig = config.sizing?.[key]
-			const defaultSize = defaultSizingDefaults[key]
-			const cssBaseName = toSnakeCase(key.replace('Size', ''))
-
-			if (sizeConfig?.rem !== undefined) {
-				container.style.setProperty(`--rylib-size-${cssBaseName}-rem`, `${sizeConfig.rem}rem`)
-			} else if (defaultSize?.rem !== undefined) {
-				container.style.setProperty(`--rylib-size-${cssBaseName}-rem`, `${defaultSize.rem}rem`)
+		if (config.sizing) {
+			const sizingStyles: string[] = []
+			Object.entries(config.sizing).forEach(([key, sizeConfig]) => {
+				if (sizeConfig?.rem !== undefined) {
+					const cssBaseName = toSnakeCase(key.replace('Size', ''))
+					sizingStyles.push(`--rylib-size-${cssBaseName}-rem: ${sizeConfig.rem}rem;`)
+				}
+			})
+			if (sizingStyles.length > 0) {
+				styles.push(`.${scopeClass} { ${sizingStyles.join(' ')} }`)
 			}
-		})
-	}, [config.theme])
+		}
+
+		return styles.join('\n')
+	}, [config.theme, config.sizing, scopeClass])
 
 	return (
 		<RyLibConfigContext.Provider value={config}>
-			<div ref={containerRef} className="rylib-theme-root">
-				{children}
-			</div>
+			{/* Sauberes HTML im DOM: Ein deklarativer Style-Block, falls Modifikationen existieren */}
+			{dynamicCss && <style dangerouslySetInnerHTML={{ __html: dynamicCss }} />}
+
+			<div className={`rylib-theme-root ${scopeClass}`}>{children}</div>
 		</RyLibConfigContext.Provider>
 	)
 }

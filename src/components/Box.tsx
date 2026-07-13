@@ -85,10 +85,10 @@ export const boxStyles = tv({
 		 */
 		background: {
 			none: '',
-			primary: 'bg-[var(--ry-primary)]',
-			secondary: 'bg-[var(--ry-secondary)]',
-			surface: 'bg-[var(--ry-surface)]',
-			themeBackground: 'bg-[var(--ry-background)]',
+			primary: 'bg-primary text-background' as const,
+			secondary: 'bg-secondary text-primary' as const,
+			surface: 'bg-surface text-primary' as const,
+			themeBackground: 'bg-background',
 			inherit: 'bg-inherit' as const,
 			teal: 'bg-teal-500 dark:bg-teal-400' as const,
 			yellow: 'bg-yellow-400 dark:bg-yellow-300' as const,

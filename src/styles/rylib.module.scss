@@ -1,4 +1,4 @@
-[data-ry-theme='light'] {
+@scope (.rylib-theme-root) {
 	--ry-surface: var(--rylib-color-surface-light, #ffffff);
 	--ry-primary: var(--rylib-color-primary-light, #000000);
 	--ry-secondary: var(--rylib-color-secondary-light, #6c757d);
@@ -9,25 +9,20 @@
 	--ry-warning: var(--rylib-color-warning-light, #ffc107);
 	--ry-error: var(--rylib-color-error-light, #dc3545);
 	--ry-background: var(--rylib-color-background-light, #ffffff);
-}
-
-[data-ry-theme='dark'] {
-	--ry-surface: var(--rylib-color-surface-dark, var(--rylib-color-surface-light),);
-	--ry-primary: var(--rylib-color-primary-dark, var(--rylib-color-primary-light), #ffffff);
-	--ry-secondary: var(--rylib-color-secondary-dark, var(--rylib-color-secondary-light), #adb5bd);
-	--ry-accent: var(--rylib-color-accent-dark, var(--rylib-color-accent-light), #375a7f);
-	--ry-secondary-accent: var(--rylib-color-secondary_accent-light, #375a7f);
-	--ry-success: var(--rylib-color-success-dark, var(--rylib-color-success-light), #00bc8c);
-	--ry-info: var(--rylib-color-info-dark, --rylib-color-info-light, #3498db);
-	--ry-warning: var(--rylib-color-warning-dark, var(--rylib-color-warning-light), #f39c12);
-	--ry-error: var(--rylib-color-error-dark, var(--rylib-color-error-light), #e74c3c);
-	--ry-neutral: var(--rylib-color-neutral-dark, var(--rylib-color-neutral-light), #303030);
-	--ry-background: var(--rylib-color-background-dark, var(--rylib-color-background-light), #111111);
-}
-
-:root {
-	--ry-border-radius: var(--rylib-size-border_radius_rem, 4rem);
-	@media (prefers-color-scheme: light) {
+	@media (prefers-color-scheme: dark) {
+		--ry-surface: var(--rylib-color-surface-dark, #111111);
+		--ry-primary: var(--rylib-color-primary-dark, #ffffff);
+		--ry-secondary: var(--rylib-color-secondary-dark, #adb5bd);
+		--ry-accent: var(--rylib-color-accent-dark, #375a7f);
+		--ry-secondary-accent: var(--rylib-color-secondaryaccent-dark, #375a7f);
+		--ry-success: var(--rylib-color-success-dark, #00bc8c);
+		--ry-info: var(--rylib-color-info-dark, #3498db);
+		--ry-warning: var(--rylib-color-warning-dark, #f39c12);
+		--ry-error: var(--rylib-color-error-dark, #e74c3c);
+		--ry-neutral: var(--rylib-color-neutral-dark, #303030);
+		--ry-background: var(--rylib-color-background-dark, #111111);
+	}
+	[data-ry-theme='light'] {
 		--ry-surface: var(--rylib-color-surface-light, #ffffff);
 		--ry-primary: var(--rylib-color-primary-light, #000000);
 		--ry-secondary: var(--rylib-color-secondary-light, #6c757d);
@@ -40,21 +35,17 @@
 		--ry-background: var(--rylib-color-background-light, #ffffff);
 	}
 
-	@media (prefers-color-scheme: dark) {
-		--ry-surface: var(--rylib-color-surface-dark, var(--rylib-color-surface-light),);
-		--ry-primary: var(--rylib-color-primary-dark, var(--rylib-color-primary-light), #ffffff);
-		--ry-secondary: var(--rylib-color-secondary-dark, var(--rylib-color-secondary-light), #adb5bd);
-		--ry-accent: var(--rylib-color-accent-dark, var(--rylib-color-accent-light), #375a7f);
-		--ry-secondary-accent: var(--rylib-color-secondaryaccent-light, #375a7f);
-		--ry-success: var(--rylib-color-success-dark, var(--rylib-color-success-light), #00bc8c);
-		--ry-info: var(--rylib-color-info-dark, --rylib-color-info-light, #3498db);
-		--ry-warning: var(--rylib-color-warning-dark, var(--rylib-color-warning-light), #f39c12);
-		--ry-error: var(--rylib-color-error-dark, var(--rylib-color-error-light), #e74c3c);
-		--ry-neutral: var(--rylib-color-neutral-dark, var(--rylib-color-neutral-light), #303030);
-		--ry-background: var(
-			--rylib-color-background-dark,
-			var(--rylib-color-background-light),
-			#111111
-		);
+	[data-ry-theme='dark'] {
+		--ry-surface: var(--rylib-color-surface-dark, #111111);
+		--ry-primary: var(--rylib-color-primary-dark, #ffffff);
+		--ry-secondary: var(--rylib-color-secondary-dark, #adb5bd);
+		--ry-accent: var(--rylib-color-accent-dark, #375a7f);
+		--ry-secondary-accent: var(--rylib-color-secondary_accent-dark, #375a7f);
+		--ry-success: var(--rylib-color-success-dark, #00bc8c);
+		--ry-info: var(--rylib-color-info-dark, #3498db);
+		--ry-warning: var(--rylib-color-warning-dark, #f39c12);
+		--ry-error: var(--rylib-color-error-dark, #e74c3c);
+		--ry-neutral: var(--rylib-color-neutral-dark, #303030);
+		--ry-background: var(--rylib-color-background-dark, #111111);
 	}
 }
