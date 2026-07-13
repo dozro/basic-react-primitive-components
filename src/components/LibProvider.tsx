@@ -1,14 +1,6 @@
-import React, {
-	createContext,
-	useContext,
-	ReactNode,
-	FC,
-	useRef,
-	useEffect,
-	useMemo,
-	useId,
-} from 'react'
+import React, { createContext, useContext, ReactNode, FC, useMemo, useId } from 'react'
 import '../styles/rylib.module.scss'
+import styles from '../styles/rylib.module.scss'
 
 /**
  * A color value
@@ -303,7 +295,9 @@ export const RyLibProvider: FC<RyLibProviderProps> = ({ config, children }: RyLi
 			{/* Sauberes HTML im DOM: Ein deklarativer Style-Block, falls Modifikationen existieren */}
 			{dynamicCss && <style dangerouslySetInnerHTML={{ __html: dynamicCss }} />}
 
-			<div className={`rylib-theme-root ${scopeClass}`}>{children}</div>
+			<div className={`${styles['rylib-theme-root']} ${scopeClass}`} data-ry-theme="light">
+				{children}
+			</div>
 		</RyLibConfigContext.Provider>
 	)
 }
