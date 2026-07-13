@@ -1,6 +1,6 @@
 {
 	"name": "@1ry/basic-react-primitive-components",
-	"version": "0.2.2-4",
+	"version": "0.2.2-5",
 	"description": "some basic react primitive components",
 	"keywords": [
 		"components",
@@ -43,7 +43,24 @@
 			"import": "./lib/index.mjs",
 			"require": "./lib/index.js"
 		},
-		"./lib/index.css": "./lib/index.css"
+		"./lib/index.css": {
+			"style": "./lib/index.css",
+			"import": "./lib/index.css",
+			"production": "./lib/index.css",
+			"default": "./lib/index.css"
+		},
+		"./dist/index.css": {
+			"style": "./lib/index.css",
+			"import": "./lib/index.css",
+			"production": "./lib/index.css",
+			"default": "./lib/index.css"
+		},
+		"./style.css": {
+			"style": "./lib/index.css",
+			"import": "./lib/index.css",
+			"production": "./lib/index.css",
+			"default": "./lib/index.css"
+		}
 	},
 	"scripts": {
 		"build": "rollup -c",
