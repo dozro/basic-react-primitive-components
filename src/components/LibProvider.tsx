@@ -35,46 +35,63 @@ export interface RyThemeConfig {
 	 * The primary color of the library.
 	 * This will be used for Text components, Input components, and other components that use the primary color.
 	 * @example { lightColor: "#FF0000", darkColor: "#00FF00" }
+	 * @default { light: '#000000', dark: '#ffffff' }
 	 */
 	primaryColor?: RyColorConfig
 	/**
 	 * The secondary color of the library.
 	 * @example { lightColor: "#0000FF", darkColor: "#FFFF00" }
+	 * @default { light: '#6c757d', dark: '#adb5bd' }
 	 */
 	secondaryColor?: RyColorConfig
 	/**
 	 * The accent color of the library.
 	 * This will be used for highlighted text, buttons, and other components that use the accent color.
 	 * @example { lightColor: "#FF00FF", darkColor: "#00FFFF" }
+	 * @default { light: '#ff8c00', dark: '#375a7f' }
 	 */
 	accentColor?: RyColorConfig
+	/**
+	 * The secondary accent color for the library.
+	 * @example { lightColor: "#FF00FF", darkColor: "#00FFFF" }
+	 * @default { light: '#ff8c00', dark: '#375a7f' }
+	 */
 	secondaryAccentColor?: RyColorConfig
 	/**
 	 * The success color of the library.
 	 * This will be used for success messages, success icons, and other components that use the success color.
 	 * @example { lightColor: "#00FF00", darkColor: "#FF0000" }
+	 * @default { light: '#28a745', dark: '#00bc8c' }
 	 */
 	successColor?: RyColorConfig
 	/**
 	 * The warning color of the library.
 	 * This will be used for warning messages, warning icons, and other components that use the warning color.
 	 * @example { lightColor: "#FFFF00", darkColor: "#FF8C00" }
+	 * @default { light: '#ffc107', dark: '#f39c12' }
 	 */
 	warningColor?: RyColorConfig
 	/**
 	 * The error color of the library.
 	 * This will be used for error messages, error icons, and other components that use the error color.
 	 * @example { lightColor: "#FF0000", darkColor: "#DC3545" }
+	 * @default { light: '#dc3545', dark: '#e74c3c' }
 	 */
 	errorColor?: RyColorConfig
 	/**
 	 * The info color of the library.
 	 * This will be used for info messages, info icons, and other components that use the info color.
 	 * @example { lightColor: "#17A2B8", darkColor: "#138496" }
+	 * @default { light: '#17a2b8', dark: '#3498db' }
 	 */
 	infoColor?: RyColorConfig
 	neutralColor?: RyColorConfig
 	surfaceColor?: RyColorConfig
+	/**
+	 * The default background color
+	 * @example { lightColor: "#17A2B8", darkColor: "#138496" }
+	 * @default { light: '#ffffff', dark: '#111111' }
+	 */
 	backgroundColor?: RyColorConfig
 }
 
@@ -232,6 +249,7 @@ export interface RyLibProviderProps {
  */
 export const RyLibProvider: FC<RyLibProviderProps> = ({ config, children }: RyLibProviderProps) => {
 	const containerRef = useRef<HTMLDivElement>(null)
+	const toSnakeCase = (str: string) => str.replace(/([a-z0-9])([A-Z])/g, '$1_$2').toLowerCase()
 
 	useEffect(() => {
 		/**
@@ -252,7 +270,7 @@ export const RyLibProvider: FC<RyLibProviderProps> = ({ config, children }: RyLi
 			const colorConfig = config.theme[key]
 			const defaults = defaultThemeDefaults[key]
 
-			const cssBaseName = key.replace('Color', '').toLowerCase()
+			const cssBaseName = toSnakeCase(key.replace('Color', ''))
 
 			const lightValue = colorConfig?.lightColor ?? defaults.light
 			const darkValue = colorConfig?.darkColor ?? defaults.dark
@@ -270,11 +288,12 @@ export const RyLibProvider: FC<RyLibProviderProps> = ({ config, children }: RyLi
 		sizingKeys.forEach((key) => {
 			const sizeConfig = config.sizing?.[key]
 			const defaultSize = defaultSizingDefaults[key]
+			const cssBaseName = toSnakeCase(key.replace('Size', ''))
 
 			if (sizeConfig?.rem !== undefined) {
-				container.style.setProperty(`--rylib-size-${key}-rem`, `${sizeConfig.rem}rem`)
+				container.style.setProperty(`--rylib-size-${cssBaseName}-rem`, `${sizeConfig.rem}rem`)
 			} else if (defaultSize?.rem !== undefined) {
-				container.style.setProperty(`--rylib-size-${key}-rem`, `${defaultSize.rem}rem`)
+				container.style.setProperty(`--rylib-size-${cssBaseName}-rem`, `${defaultSize.rem}rem`)
 			}
 		})
 	}, [config.theme])

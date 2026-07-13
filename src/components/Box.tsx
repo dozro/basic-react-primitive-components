@@ -15,8 +15,12 @@ export const boxStyles = tv({
 		 */
 		variant: {
 			default: '',
-			navbar: 'navbar',
-			dock: 'dock',
+			navbar: ['ry-navbar', 'navbar'] as const,
+			dock: ['ry-dock', 'dock'] as const,
+			/**
+			 * the styling for the root container
+			 */
+			root: ['ry-root', 'px-4', 'sm:px-6', 'lg:px-8', 'container'] as const,
 		},
 		noAnimation: {
 			true: 'transition-none hover:transform-none hover:shadow-none',
@@ -81,28 +85,26 @@ export const boxStyles = tv({
 		 */
 		background: {
 			none: '',
-			primary: 'bg-[var(--rylib-color-primary-light) dark:bg-[var(--rylib-color-primary-dark)]',
-			secondary:
-				'bg-[var(--rylib-color-secondary-light)] dark:bg-[var(--rylib-color-secondary-dark)]',
-			surface: 'bg-[var(--rylib-color-surface-light)] dark:bg-[var(--rylib-color-surface-dark)]',
-			themeBackground:
-				'bg-[var(--rylib-color-background-light)] dark:bg-[var(--rylib-color-background-dark)]',
-			inherit: 'bg-inherit',
-			teal: 'bg-teal-500 dark:bg-teal-400',
-			yellow: 'bg-yellow-400 dark:bg-yellow-300',
-			gray: 'bg-gray-500 dark:bg-gray-400',
-			white: 'bg-white dark:bg-neutral-900',
-			transparent: 'bg-transparent',
-			magenta: 'bg-fuchsia-500 dark:bg-fuchsia-400',
-			cyan: 'bg-cyan-500 dark:bg-cyan-300',
-			amber: 'bg-amber-500 dark:bg-amber-400',
-			lime: 'bg-lime-500 dark:bg-lime-400',
-			orange: 'bg-orange-500 dark:bg-orange-400',
-			indigo: 'bg-indigo-500 dark:bg-indigo-400',
-			violet: 'bg-violet-500 dark:bg-violet-400',
-			rose: 'bg-rose-500 dark:bg-rose-400',
-			slate: 'bg-slate-500 dark:bg-slate-700',
-			red: 'bg-red-500 dark:bg-red-900',
+			primary: 'bg-[var(--ry-primary)]',
+			secondary: 'bg-[var(--ry-secondary)]',
+			surface: 'bg-[var(--ry-surface)]',
+			themeBackground: 'bg-[var(--ry-background)]',
+			inherit: 'bg-inherit' as const,
+			teal: 'bg-teal-500 dark:bg-teal-400' as const,
+			yellow: 'bg-yellow-400 dark:bg-yellow-300' as const,
+			gray: 'bg-gray-500 dark:bg-gray-400' as const,
+			white: 'bg-white dark:bg-neutral-900' as const,
+			transparent: 'bg-transparent' as const,
+			magenta: 'bg-fuchsia-500 dark:bg-fuchsia-400' as const,
+			cyan: 'bg-cyan-500 dark:bg-cyan-300' as const,
+			amber: 'bg-amber-500 dark:bg-amber-400' as const,
+			lime: 'bg-lime-500 dark:bg-lime-400' as const,
+			orange: 'bg-orange-500 dark:bg-orange-400' as const,
+			indigo: 'bg-indigo-500 dark:bg-indigo-400' as const,
+			violet: 'bg-violet-500 dark:bg-violet-400' as const,
+			rose: 'bg-rose-500 dark:bg-rose-400' as const,
+			slate: 'bg-slate-500 dark:bg-slate-700' as const,
+			red: 'bg-red-500 dark:bg-red-900' as const,
 		},
 		/**
 		 * whether the box should be allowed to grow
