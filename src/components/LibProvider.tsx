@@ -8,7 +8,6 @@ import React, {
 	useMemo,
 	useId,
 } from 'react'
-import '../styles/tailwind.css'
 import '../styles/rylib.module.scss'
 
 /**

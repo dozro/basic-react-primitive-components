@@ -1,9 +1,5 @@
 .boxBase {
-	background-color: var(--rylib-color-surface-light);
+	background-color: var(--ry-surface);
 	padding: 0.5rem;
 	border-radius: 0.25rem;
-
-	@media (prefers-color-scheme: dark) {
-		background-color: var(--rylib-color-surface-dark);
-	}
 }
