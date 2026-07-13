@@ -1,0 +1,14 @@
+@plugin 'tailwindcss';
+
+@theme {
+	--color-primary: var(--ry-primary);
+	--color-secondary: var(--ry-secondary);
+	--color-accent: var(--ry-accent);
+	--color-secondary-accent: var(--ry-secondary-accent);
+	--color-success: var(--ry-success);
+	--color-info: var(--ry-info);
+	--color-warning: var(--ry-warning);
+	--color-error: var(--ry-error);
+	--color-neutral: var(--ry-neutral);
+	--color-background: var(--ry-background);
+}

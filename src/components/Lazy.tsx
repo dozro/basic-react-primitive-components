@@ -6,6 +6,11 @@ import { RyLibConfig, useRyLibConfig } from './LibProvider'
 
 export interface LazyProps {
 	component: ComponentType
+	/**
+	 * The text to display as fallback when lazy loading components.
+	 * @example "Loading..."
+	 * @default "loading component....... meow"
+	 */
 	loadingText?: string
 }
 

@@ -1,5 +1,5 @@
 .iconButtonBase {
-	color: var(--rylib-color-primary-light);
+	color: var(--ry-primary);
 	background: transparent;
 	border: none;
 	cursor: pointer;
@@ -13,43 +13,24 @@
 		box-shadow 0.15s ease,
 		background-color 0.15s ease;
 
-	@media (prefers-color-scheme: dark) {
-		color: var(--rylib-color-primary-dark);
-	}
-
 	&:hover {
 		transform: translateY(-2px);
 	}
 
 	&:active {
 		transform: translateY(0);
-		box-shadow: 0 3px 8px var(--rylib-color-secondary-light);
-
-		@media (prefers-color-scheme: dark) {
-			box-shadow: 0 3px 8px var(--rylib-color-secondary-dark);
-		}
+		box-shadow: 0 3px 8px var(--ry-secondary-accent);
 	}
 
 	&:focus-visible {
 		outline: 2px solid currentColor;
 		outline-offset: 3px;
 	}
+
 	&.glow {
 		&:hover {
-			background: linear-gradient(
-				135deg,
-				var(--rylib-color-accent-light),
-				var(--rylib-color-secondaryaccent-light)
-			);
-			box-shadow: 0 0 20px var(--rylib-color-accent-light);
-			@media (prefers-color-scheme: dark) {
-				background: linear-gradient(
-					135deg,
-					var(--rylib-color-accent-dark),
-					var(--rylib-color-secondaryaccent-dark)
-				);
-				box-shadow: 0 0 20px var(--rylib-color-accent-dark);
-			}
+			background: linear-gradient(135deg, var(--ry-accent), var(--ry-secondary-accent));
+			box-shadow: 0 0 20px var(--ry-accent);
 		}
 	}
 }

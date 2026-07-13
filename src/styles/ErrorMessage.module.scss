@@ -1,23 +1,15 @@
 .errorMessageBase {
-	color: red;
+	color: var(--ry-error);
 	font-size: 0.8rem;
 	margin-top: 0.25rem;
 	&.critical {
-		background-color: red;
-		color: white;
+		background-color: var(--ry-error);
+		color: var(--ry-primary);
 		font-weight: bold;
-		@media (prefers-color-scheme: dark) {
-			background-color: darkred;
-			color: wheat;
-		}
 	}
 	&.warning {
 		font-style: italic;
-		background-color: yellow;
-		color: black;
-		@media (prefers-color-scheme: dark) {
-			background-color: darkorange;
-			color: white;
-		}
+		background-color: var(--ry-warning);
+		color: var(--ry-primary);
 	}
 }

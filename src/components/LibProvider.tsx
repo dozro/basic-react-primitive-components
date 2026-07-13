@@ -1,4 +1,6 @@
 import React, { createContext, useContext, ReactNode, FC, useRef, useEffect } from 'react'
+import '../styles/tailwind.css'
+import '../styles/rylib.module.scss'
 
 /**
  * A color value
@@ -16,6 +18,16 @@ export interface RyColorConfig {
 	 * @example "#00FF00"
 	 */
 	darkColor?: string
+}
+
+/**
+ * A size configuration for the library, allowing customization of sizing units.
+ */
+export interface RySizeConfig {
+	/**
+	 * The base size in pixels for the library.
+	 */
+	rem?: number
 }
 
 export interface RyThemeConfig {
@@ -66,7 +78,28 @@ export interface RyThemeConfig {
 	backgroundColor?: RyColorConfig
 }
 
+/**
+ * The sizing configuration for the library, allowing customization of sizing units.
+ * This configuration can be used to set the base size for components, such as buttons, inputs, and other elements.
+ */
+export interface RySizingConfig {
+	/**
+	 * The border radius of the library.
+	 * This will be used for buttons, inputs, and other components that use the border radius.
+	 * @example { rem: 0.25 }
+	 */
+	borderRadius?: RySizeConfig
+}
+
+/**
+ * The branding customization options for the library.
+ */
 export interface RyLibBrandingCustomization {
+	/**
+	 * The text to display as fallback when lazy loading components.
+	 * @example "Loading..."
+	 * @default "loading component....... meow"
+	 */
 	lazyLoadingText?: string
 }
 
@@ -75,9 +108,16 @@ export interface RyLibBrandingCustomization {
  */
 export interface RyLibConfig {
 	theme: RyThemeConfig
+	sizing?: RySizingConfig
 	customization?: RyLibBrandingCustomization
 }
 
+/**
+ * Default theme values for the library, used when no custom configuration is provided.
+ * Each key corresponds to a color configuration in the `RyThemeConfig`.
+ * The default values are provided for both light and dark themes.
+ * @see {@link RyThemeConfig}
+ */
 const defaultThemeDefaults: Record<keyof RyThemeConfig, { light: string; dark: string }> = {
 	primaryColor: { light: '#000000', dark: '#ffffff' },
 	secondaryColor: { light: '#6c757d', dark: '#adb5bd' },
@@ -92,10 +132,63 @@ const defaultThemeDefaults: Record<keyof RyThemeConfig, { light: string; dark: s
 	secondaryAccentColor: { light: '#ff8c00', dark: '#375a7f' },
 }
 
+const defaultSizingDefaults: RySizingConfig = {
+	borderRadius: { rem: 0.25 },
+}
+
 const RyLibConfigContext = createContext<RyLibConfig | undefined>(undefined)
 
+/**
+ * Properties for the `RyLibProvider` component, which initializes and manages the library configuration.
+ */
 export interface RyLibProviderProps {
+	/**
+	 * The global configuration object containing the theme settings, sizing options, and branding customization.
+	 * This configuration will be provided to all child components via context.
+	 * @see {@link RyLibConfig}
+	 * @example
+	 * ```tsx
+	 * const myConfig: RyLibProviderProps['config'] = {
+	 *   theme: {
+	 *     primaryColor: { lightColor: '#3490dc', darkColor: '#1d68a7' }
+	 *   }
+	 * };
+	 *
+	 * const App = () => (
+	 *   <RyLibProvider config="{myConfig}">
+	 *     <MyComponent/>
+	 *   </RyLibProvider>
+	 * );
+	 * ```
+	 * @default
+	 * ```ts
+	 *{
+	 *   theme: {
+	 *     primaryColor: { lightColor: '#000000', darkColor: '#ffffff' },
+	 *     secondaryColor: { lightColor: '#6c757d', darkColor: '#adb5bd' },
+	 *     accentColor: { lightColor: '#ff8c00', darkColor: '#375a7f' },
+	 *     successColor: { lightColor: '#28a745', darkColor: '#00bc8c' },
+	 *     warningColor: { lightColor: '#ffc107', darkColor: '#f39c12' },
+	 *     errorColor: { lightColor: '#dc3545', darkColor: '#e74c3c' },
+	 *     infoColor: { lightColor: '#17a2b8', darkColor: '#3498db' },
+	 *     neutralColor: { lightColor: '#f8f9fa', darkColor: '#303030' },
+	 *     surfaceColor: { lightColor: '#ffffff', darkColor: '#222222' },
+	 *     backgroundColor: { lightColor: '#ffffff', darkColor: '#111111' },
+	 *     secondaryAccentColor: { lightColor: '#ff8c00', darkColor: '#375a7f' },
+	 *   },
+	 *   sizing: {
+	 *     borderRadius: { rem: 0.25 }
+	 *   },
+	 *   customization: {
+	 *     lazyLoadingText: "loading component....... meow"
+	 *   }
+	 * }
+	 * ```
+	 */
 	config: RyLibConfig
+	/**
+	 * The child components. In most cases this is the rest of your application.
+	 */
 	children: ReactNode
 }
 
@@ -141,9 +234,18 @@ export const RyLibProvider: FC<RyLibProviderProps> = ({ config, children }: RyLi
 	const containerRef = useRef<HTMLDivElement>(null)
 
 	useEffect(() => {
+		/**
+		 * The container element where the CSS custom properties will be injected.
+		 */
 		const container = containerRef.current
 		if (!container) return
 
+		/**
+		 * the individual theme keys to be processed for CSS variable injection.
+		 * Each key corresponds to a color configuration in the `RyThemeConfig`.
+		 * The keys are used to generate CSS custom properties for both light and dark themes.
+		 * @see {@link defaultThemeDefaults}
+		 */
 		const themeKeys = Object.keys(defaultThemeDefaults) as Array<keyof RyThemeConfig>
 
 		themeKeys.forEach((key) => {
@@ -157,6 +259,23 @@ export const RyLibProvider: FC<RyLibProviderProps> = ({ config, children }: RyLi
 
 			container.style.setProperty(`--rylib-color-${cssBaseName}-light`, lightValue)
 			container.style.setProperty(`--rylib-color-${cssBaseName}-dark`, darkValue)
+		})
+		/**
+		 * The individual sizing keys to be processed for CSS variable injection.
+		 * Each key corresponds to a size configuration in the `RySizingConfig`.
+		 * The keys are used to generate CSS custom properties for sizing units.
+		 * @see {@link defaultSizingDefaults}
+		 */
+		const sizingKeys = Object.keys(defaultSizingDefaults) as Array<keyof RySizingConfig>
+		sizingKeys.forEach((key) => {
+			const sizeConfig = config.sizing?.[key]
+			const defaultSize = defaultSizingDefaults[key]
+
+			if (sizeConfig?.rem !== undefined) {
+				container.style.setProperty(`--rylib-size-${key}-rem`, `${sizeConfig.rem}rem`)
+			} else if (defaultSize?.rem !== undefined) {
+				container.style.setProperty(`--rylib-size-${key}-rem`, `${defaultSize.rem}rem`)
+			}
 		})
 	}, [config.theme])
 
