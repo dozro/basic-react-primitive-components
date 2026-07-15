@@ -39,13 +39,19 @@ export type SmartSelectOption = {
 
 export type SmartSelectProps = Omit<SelectProps, 'children'> & {
 	options: SmartSelectOption[]
+	label: string
 }
 
-export const SmartSelect = ({ options, ...props }: SmartSelectProps) => {
+export const SmartSelect = ({ options, label, ...props }: SmartSelectProps) => {
 	const htmlId = useId()
 
 	return (
 		<Select id={htmlId} {...props}>
+			{label && (
+				<Option value="" disabled>
+					{label}
+				</Option>
+			)}
 			{options.map((option) => (
 				<Option key={option.value} value={option.value}>
 					{option.label}
