@@ -125,6 +125,7 @@ export interface RyLibBrandingCustomization {
  */
 export interface RyLibConfig {
 	theme: RyThemeConfig
+	isolateErrors?: boolean
 	sizing?: RySizingConfig
 	customization?: RyLibBrandingCustomization
 }
@@ -292,7 +293,6 @@ export const RyLibProvider: FC<RyLibProviderProps> = ({ config, children }: RyLi
 
 	return (
 		<RyLibConfigContext.Provider value={config}>
-			{/* Sauberes HTML im DOM: Ein deklarativer Style-Block, falls Modifikationen existieren */}
 			{dynamicCss && <style dangerouslySetInnerHTML={{ __html: dynamicCss }} />}
 
 			<div className={`${styles['rylib-theme-root']} ${scopeClass}`} data-ry-theme="light">

@@ -3,6 +3,8 @@ import clsx from 'clsx'
 import { twMerge } from 'tailwind-merge'
 import { tv, type VariantProps } from 'tailwind-variants'
 import React, { type HTMLAttributes, type ReactNode, useMemo } from 'react'
+import { useRyLibConfig } from './LibProvider'
+import { ErrorBoundary } from './ErrorBoundary'
 
 /**
  * Tailwind Variant configurations for the Box component, powered by `tailwind-variants`.
@@ -352,6 +354,7 @@ export function Box({
 	...props
 }: BoxProps) {
 	const id = useMemo(() => customId ?? generateShortId(7), [customId])
+	const libConfig = useRyLibConfig()
 	const Component = variant === 'navbar' && !as ? 'nav' : as || 'div'
 	const gapStyle = gap ? { gap: `${gap * 0.25}rem` } : undefined
 	const resolvedClassName = twMerge(
@@ -381,7 +384,7 @@ export function Box({
 		className,
 		clsx(borderWidth && `border-${borderWidth}`),
 	)
-	return (
+	const boxInner = (
 		<Component
 			{...props}
 			id={id}
@@ -392,4 +395,8 @@ export function Box({
 			{children}
 		</Component>
 	)
+	if (libConfig?.isolateErrors) {
+		return <ErrorBoundary>{boxInner}</ErrorBoundary>
+	}
+	return { boxInner }
 }
