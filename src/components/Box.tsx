@@ -384,19 +384,17 @@ export function Box({
 		className,
 		clsx(borderWidth && `border-${borderWidth}`),
 	)
-	const boxInner = (
-		<Component
-			{...props}
-			id={id}
-			style={{ ...gapStyle, ...props.style }}
-			data-has-gap={gap > 0 ? 'true' : undefined}
-			className={resolvedClassName}
-		>
-			{children}
-		</Component>
+	return (
+		<ErrorBoundary enabled={!!libConfig?.isolateErrors}>
+			<Component
+				{...props}
+				id={id}
+				style={{ ...gapStyle, ...props.style }}
+				data-has-gap={gap > 0 ? 'true' : undefined}
+				className={resolvedClassName}
+			>
+				{children}
+			</Component>
+		</ErrorBoundary>
 	)
-	if (libConfig?.isolateErrors) {
-		return <ErrorBoundary>{boxInner}</ErrorBoundary>
-	}
-	return { boxInner }
 }

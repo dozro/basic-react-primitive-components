@@ -1,8 +1,8 @@
-import React, { type ComponentProps } from 'react'
-import { Box } from '$components/Box'
+import React from 'react'
+import { Box, type BoxProps } from '$components/Box'
 
 export type RootBoxProps = Omit<
-	ComponentProps<typeof Box>,
+	BoxProps,
 	'paddingX' | 'paddingY' | 'width' | 'grow' | 'variant'
 > & {
 	/**
